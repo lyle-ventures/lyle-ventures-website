@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://lyle-ventures.xyz/sitemap.xml
+
+# LLMs.txt for AI crawlers
+# See: https://lyle-ventures.xyz/llms.txt

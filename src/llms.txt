@@ -1,0 +1,71 @@
+# Lyle Ventures — llms.txt
+
+> Venture capital for creators and builders at the technology frontier.
+
+## Overview
+
+Lyle Ventures is an early-stage venture capital firm founded by Ethan Lyle. We invest in technical founders building foundational infrastructure across six frontier technology sectors.
+
+## Founder
+
+**Ethan Lyle**
+- Founder & Managing Partner
+- Email: ethan@lyle-ventures.xyz
+- LinkedIn: https://www.linkedin.com/in/ethanlyle/
+- Background: Harvard College (Government), Harvard Kennedy School (MPP), Columbia Business School (MBA)
+- Prior experience: Teneo, Kekst CNC, Wachsman, Obama 2008 campaign
+
+## Investment Focus
+
+### Stage
+- Pre-Seed
+- Seed
+- Series A
+
+### Check Size
+$250K – $2M
+
+### Sectors
+
+1. **Artificial Intelligence (AI)** — Machine learning, foundation models, AI infrastructure, applied AI
+2. **Crypto & Blockchain** — DeFi, infrastructure, gaming, tokenization
+3. **Defense Technology** — Dual-use technologies, autonomous systems, cybersecurity
+4. **Education Technology** — Learning platforms, credentialing, workforce development
+5. **Energy** — Nuclear, fusion, grid infrastructure, clean energy
+6. **Biomedical & Health** — Longevity, diagnostics, therapeutics, health infrastructure
+
+## Portfolio Companies
+
+- **SVRN** (Biomedical) — Accelerating biomedical innovation
+- **Valley Arcade** (Crypto) — Blockchain gaming via physical arcade cabinets
+- **Phoenix Fund** (Education) — VC backing Harvard's top founders
+- **EloraHQ** (AI) — AI-powered care assistant
+- **Stealth** (Energy) — Nuclear energy project
+- **Mearas** (Defense) — Electric off-road vehicles for civilian and military use
+
+## Investment Criteria
+
+We look for:
+- Technical founders with deep domain expertise
+- Clear insight into an underserved market
+- Long-term tenacity and ability to outlast market cycles
+- Products that solve hard problems others avoid
+
+## Contact
+
+**For founders seeking investment:**
+Email: ethan@lyle-ventures.xyz
+
+Include:
+- Brief background on you and your team
+- What you're building and the problem you're solving
+- Why now, and why you
+- Current stage and what you're raising
+- Deck or demo (if available)
+
+## Website
+https://lyle-ventures.xyz
+
+## Keywords
+
+venture capital, VC, frontier technology, deep tech, hard tech, AI investing, artificial intelligence, machine learning, crypto, blockchain, defense tech, energy investing, nuclear energy, biomedical, health tech, education technology, seed stage, pre-seed, early stage investing, Ethan Lyle, Lyle Ventures, technology investment, startup funding, technical founders, infrastructure investing

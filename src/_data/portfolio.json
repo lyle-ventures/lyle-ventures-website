@@ -1,0 +1,52 @@
+{
+  "companies": [
+    {
+      "name": "SVRN",
+      "sector": "Biomedical",
+      "sectorCode": "BIO",
+      "sectorColor": "#FFB800",
+      "description": "SVRN is a community passionate about offering long-term solutions to accelerate biomedical innovation.",
+      "url": "https://www.svrnenterprises.com"
+    },
+    {
+      "name": "Valley Arcade",
+      "sector": "Crypto",
+      "sectorCode": "CRY",
+      "sectorColor": "#AA66FF",
+      "description": "Valley connects gamers to the Blockchain via physical arcade cabinets. Valley develops and publishes games.",
+      "url": "https://www.valley-arcade.com"
+    },
+    {
+      "name": "Phoenix Fund",
+      "sector": "Education",
+      "sectorCode": "EDU",
+      "sectorColor": "#FF6B35",
+      "description": "Phoenix is a venture capital firm backing Harvard's top founders at the earliest stages, from angel to seed.",
+      "url": "https://www.phoenixclub.vc"
+    },
+    {
+      "name": "EloraHQ",
+      "sector": "AI",
+      "sectorCode": "AI",
+      "sectorColor": "#00D4FF",
+      "description": "EloraHQ is an advanced AI-powered care assistant that offers 24/7 personalized support, creates care plans, and more.",
+      "url": "https://elorahq.com"
+    },
+    {
+      "name": "Stealth",
+      "sector": "Energy",
+      "sectorCode": "NRG",
+      "sectorColor": "#00FF88",
+      "description": "Nuclear energy infrastructure project. Details coming soon.",
+      "url": null
+    },
+    {
+      "name": "Mearas",
+      "sector": "Defense",
+      "sectorCode": "DEF",
+      "sectorColor": "#FF3366",
+      "description": "Mearas is pioneering electric off-road vehicles for civilian and military use. Making optionally manned, AI capable vehicles for the future today.",
+      "url": "https://mearas.us"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-lv-bg text-white antialiased;
+  }
+  
+  body {
+    @apply min-h-screen;
+  }
+}
+
+@layer components {
+  /* Lattice Typography - Headlines */
+  .headline-caps {
+    @apply font-sans font-light uppercase tracking-tighter;
+    line-height: 0.95;
+  }
+  
+  .headline-sentence {
+    @apply font-sans font-light tracking-tighter;
+    line-height: 0.95;
+  }
+  
+  /* Labels */
+  .label {
+    @apply font-mono text-xs uppercase tracking-widest text-white/50;
+  }
+  
+  /* Portfolio company names */
+  .company-name {
+    @apply font-sans font-black uppercase tracking-tight;
+    letter-spacing: -0.03em;
+  }
+  
+  /* Sector tags */
+  .sector-tag {
+    @apply font-mono text-xs font-medium;
+  }
+  
+  /* Neo-brutalist card */
+  .card-brutalist {
+    @apply bg-white border-2 border-black rounded-xl p-6;
+    box-shadow: 6px 6px 0 #111111;
+    transition: all 0.1s ease;
+  }
+  
+  .card-brutalist:hover {
+    box-shadow: 8px 8px 0 #111111;
+    transform: translate(-2px, -2px);
+  }
+  
+  /* Nav link */
+  .nav-link {
+    @apply text-xs font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors;
+  }
+}

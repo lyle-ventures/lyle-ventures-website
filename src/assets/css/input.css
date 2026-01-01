@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-lv-bg text-lv-text antialiased;
+  }
+  
+  ::selection {
+    @apply bg-lv-accent/30;
+  }
+}
+
+@layer components {
+  /* Lattice Typography */
+  .headline-caps {
+    @apply font-sans font-light uppercase tracking-tighter-custom;
+    line-height: 0.95;
+  }
+  
+  .headline-sentence {
+    @apply font-sans font-light tracking-tighter-custom;
+    line-height: 1.0;
+  }
+  
+  .label {
+    @apply font-mono text-xs uppercase tracking-wide-custom text-lv-text-muted;
+  }
+  
+  /* Nav link style (Kinetic Bold) */
+  .nav-link {
+    @apply text-xs font-bold uppercase tracking-widest text-lv-text-muted hover:text-white transition-colors;
+  }
+  
+  /* Sector tag */
+  .sector-tag {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-mono font-medium uppercase tracking-wide border border-current;
+  }
+  
+  /* Portfolio company name */
+  .company-name {
+    @apply font-sans font-black uppercase;
+    letter-spacing: -0.03em;
+  }
+  
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-150 ease-out;
+  }
+  
+  .card-hover:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 #111111;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-lv-accent to-cyan-400;
+  }
+}

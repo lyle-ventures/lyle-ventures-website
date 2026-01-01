@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | Lyle Ventures</title>
+  <meta name="description" content="{{ description | default('Venture capital for creators and builders at the technology frontier.') }}">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ title }} | Lyle Ventures">
+  <meta property="og:description" content="{{ description | default('Venture capital for creators and builders at the technology frontier.') }}">
+  <meta property="og:type" content="website">
+</head>
+<body class="min-h-screen">
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-lv-border bg-lv-bg/90 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-6 md:px-12 py-5 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2.5 group">
+        <div class="w-8 h-8 border-[1.5px] border-white flex items-center justify-center text-[11px] font-semibold tracking-wide group-hover:border-lv-accent transition-colors">
+          LV
+        </div>
+        <span class="text-lg font-semibold" style="letter-spacing: -0.01em;">
+          Lyle<span class="text-lv-accent" style="margin-left: 0.03em; margin-right: -0.1em; font-size: 1.15em;">.</span>Ventures
+        </span>
+      </a>
+      
+      <!-- Nav Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="/portfolio" class="nav-link">Portfolio</a>
+        <a href="/thesis" class="nav-link">Thesis</a>
+        <a href="/contact" class="nav-link">Contact</a>
+      </div>
+      
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Toggle menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-lv-border bg-lv-bg">
+      <div class="px-6 py-4 space-y-4">
+        <a href="/portfolio" class="block nav-link">Portfolio</a>
+        <a href="/thesis" class="block nav-link">Thesis</a>
+        <a href="/contact" class="block nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Main Content -->
+  <main class="pt-20">
+    {{ content | safe }}
+  </main>
+  
+  <!-- Footer -->
+  <footer class="border-t border-lv-border mt-24">
+    <div class="max-w-6xl mx-auto px-6 md:px-12 py-12">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+        <!-- Sectors -->
+        <div class="flex flex-wrap gap-3 text-sm text-lv-text-muted">
+          <span class="text-sector-ai">AI</span>
+          <span>·</span>
+          <span class="text-sector-crypto">Crypto</span>
+          <span>·</span>
+          <span class="text-sector-defense">Defense</span>
+          <span>·</span>
+          <span class="text-sector-education">Education</span>
+          <span>·</span>
+          <span class="text-sector-energy">Energy</span>
+          <span>·</span>
+          <span class="text-sector-bio">Health</span>
+        </div>
+        
+        <!-- Copyright -->
+        <p class="text-sm text-lv-text-muted">
+          © 2025 Lyle Ventures
+        </p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Mobile menu script -->
+  <script>
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
