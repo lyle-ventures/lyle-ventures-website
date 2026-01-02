@@ -16,26 +16,27 @@ permalink: /portfolio/
       </h1>
     </div>
 
-    <!-- Sector filter (visual only for now) -->
+    <!-- Sector filter -->
     <div class="flex flex-wrap gap-3 mb-12">
-      <button class="px-4 py-2 rounded-full bg-gray-900 text-white text-xs font-bold uppercase tracking-wider">All</button>
+      <button onclick="filterSector('all')" data-sector="all" class="sector-btn px-4 py-2 rounded-full bg-gray-900 text-white text-xs font-bold uppercase tracking-wider transition-all">All</button>
       {% for sector in site.sectors %}
-      <button class="px-4 py-2 rounded-full border border-black/20 text-xs font-bold uppercase tracking-wider text-gray-500 hover:border-black/40 transition-colors">{{ sector.name }}</button>
+      <button onclick="filterSector('{{ sector.name }}')" data-sector="{{ sector.name }}" class="sector-btn px-4 py-2 rounded-full border border-black/20 text-xs font-bold uppercase tracking-wider text-gray-500 hover:border-black/40 transition-all">{{ sector.name }}</button>
       {% endfor %}
     </div>
 
     <!-- Portfolio Grid -->
-    <div class="grid md:grid-cols-2 gap-4">
+    <div id="portfolio-grid" class="grid md:grid-cols-2 gap-4">
       {% for company in portfolio.companies %}
       <a href="{{ company.url or '#' }}"
-         class="group p-8 rounded-xl border border-black/10 hover:border-black/20 bg-gray-50 transition-all {% if not company.url %}cursor-default{% endif %}"
+         data-sector="{{ company.sector }}"
+         class="company-card group p-8 rounded-xl border border-black/10 hover:border-black/20 bg-gray-50 transition-all {% if not company.url %}cursor-default{% endif %}"
          {% if company.url %}target="_blank" rel="noopener"{% endif %}>
 
         <!-- Header: Logo + Sector Tag -->
         <div class="flex items-start justify-between mb-6">
           {% if company.logo %}
-          <div class="w-16 h-16 rounded-lg overflow-hidden bg-white border border-black/10 flex-shrink-0">
-            <img src="{{ company.logo }}" alt="{{ company.name }} logo" class="w-full h-full object-contain p-2">
+          <div class="w-24 h-24 rounded-xl overflow-hidden bg-white border border-black/10 flex-shrink-0">
+            <img src="{{ company.logo }}" alt="{{ company.name }} logo" class="w-full h-full object-contain p-3">
           </div>
           {% endif %}
           <div class="flex items-center gap-2">
@@ -61,3 +62,30 @@ permalink: /portfolio/
     </div>
   </div>
 </section>
+
+<script>
+  function filterSector(sector) {
+    const buttons = document.querySelectorAll('.sector-btn');
+    const cards = document.querySelectorAll('.company-card');
+
+    // Update button styles
+    buttons.forEach(btn => {
+      if (btn.dataset.sector === sector) {
+        btn.classList.remove('border', 'border-black/20', 'text-gray-500');
+        btn.classList.add('bg-gray-900', 'text-white');
+      } else {
+        btn.classList.remove('bg-gray-900', 'text-white');
+        btn.classList.add('border', 'border-black/20', 'text-gray-500');
+      }
+    });
+
+    // Filter cards
+    cards.forEach(card => {
+      if (sector === 'all' || card.dataset.sector === sector) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
