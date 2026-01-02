@@ -1,10 +1,10 @@
 # Lyle Ventures — llms.txt
 
-> Venture capital for creators and builders at the technology frontier.
+> Backing creators and builders at the tech frontier.
 
 ## Overview
 
-Lyle Ventures is an early-stage venture capital firm founded by Ethan Lyle. We invest in technical founders building foundational infrastructure across six frontier technology sectors.
+Lyle Ventures is an early-stage venture capital firm founded by Ethan Lyle. We invest in frontier technology companies across six sectors where we believe challengers can create durable value.
 
 ## Founder
 
@@ -12,60 +12,53 @@ Lyle Ventures is an early-stage venture capital firm founded by Ethan Lyle. We i
 - Founder & Managing Partner
 - Email: ethan@lyle-ventures.xyz
 - LinkedIn: https://www.linkedin.com/in/ethanlyle/
-- Background: Harvard College (Government), Harvard Kennedy School (MPP), Columbia Business School (MBA)
-- Prior experience: Teneo, Kekst CNC, Wachsman, Obama 2008 campaign
 
 ## Investment Focus
 
 ### Stage
 - Pre-Seed
 - Seed
-- Series A
 
 ### Check Size
-$250K – $2M
+$10K – $100K
 
 ### Sectors
 
 1. **Artificial Intelligence (AI)** — Machine learning, foundation models, AI infrastructure, applied AI
 2. **Crypto & Blockchain** — DeFi, infrastructure, gaming, tokenization
 3. **Defense Technology** — Dual-use technologies, autonomous systems, cybersecurity
-4. **Education Technology** — Learning platforms, credentialing, workforce development
-5. **Energy** — Nuclear, fusion, grid infrastructure, clean energy
-6. **Biomedical & Health** — Longevity, diagnostics, therapeutics, health infrastructure
+4. **Energy** — Nuclear, fusion, grid infrastructure, clean energy
+5. **Health** — Longevity, diagnostics, therapeutics, health infrastructure
+6. **Fund of Funds** — Strategic LP positions in aligned venture funds
 
 ## Portfolio Companies
 
-- **SVRN** (Biomedical) — Accelerating biomedical innovation
-- **Valley Arcade** (Crypto) — Blockchain gaming via physical arcade cabinets
-- **Phoenix Fund** (Education) — VC backing Harvard's top founders
-- **EloraHQ** (AI) — AI-powered care assistant
-- **Stealth** (Energy) — Nuclear energy project
+- **EloraHQ** (AI) — AI-powered care assistant with 24/7 personalized support
 - **Mearas** (Defense) — Electric off-road vehicles for civilian and military use
+- **Phoenix Fund** (Fund of Funds) — VC backing Harvard's top founders at earliest stages
+- **Stealth Nuclear Project** (Energy) — TBA
+- **SVRN** (Health) — Accelerating biomedical innovation
+- **Valley Arcade Games** (Crypto) — Blockchain gaming via physical arcade cabinets
 
-## Investment Criteria
+## What We Look For
 
-We look for:
-- Technical founders with deep domain expertise
-- Clear insight into an underserved market
-- Long-term tenacity and ability to outlast market cycles
-- Products that solve hard problems others avoid
+The companies we back share common traits:
+
+- **Obsessed founders** with a deeply personal motivation to succeed
+- **Big swings** — we don't do incremental
+- **Clear view** on the pathway to success (coup d'œil)
+- **Convincing logic** for achieving sustained competitive advantage
+- **Interested in help** if it improves odds of success
+- **Kindness** — founders and teams must be kind at heart
 
 ## Contact
 
 **For founders seeking investment:**
 Email: ethan@lyle-ventures.xyz
 
-Include:
-- Brief background on you and your team
-- What you're building and the problem you're solving
-- Why now, and why you
-- Current stage and what you're raising
-- Deck or demo (if available)
-
 ## Website
 https://lyle-ventures.xyz
 
 ## Keywords
 
-venture capital, VC, frontier technology, deep tech, hard tech, AI investing, artificial intelligence, machine learning, crypto, blockchain, defense tech, energy investing, nuclear energy, biomedical, health tech, education technology, seed stage, pre-seed, early stage investing, Ethan Lyle, Lyle Ventures, technology investment, startup funding, technical founders, infrastructure investing
+venture capital, VC, frontier technology, deep tech, hard tech, AI investing, artificial intelligence, machine learning, crypto, blockchain, defense tech, energy investing, nuclear energy, health tech, seed stage, pre-seed, early stage investing, Ethan Lyle, Lyle Ventures, technology investment, startup funding, technical founders, infrastructure investing

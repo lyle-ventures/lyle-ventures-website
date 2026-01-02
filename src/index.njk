@@ -6,76 +6,111 @@ title: Home
 <!-- Hero Section -->
 <section class="min-h-[85vh] sm:min-h-[90vh] flex items-center">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-    <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-4 sm:mb-6">Early Stage · Multi-Sector</p>
+    <p class="font-mono text-[10px] uppercase tracking-widest text-gray-300 mb-4 sm:mb-6">Early Stage · Multi-Sector</p>
 
     <h1 class="font-sans font-light tracking-tighter text-3xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 sm:mb-8 max-w-4xl text-gray-900" style="line-height: 0.95;">
-      Venture capital for<br>
-      creators and builders at<br>
-      the technology frontier
+      Backing creators and builders at the tech frontier
     </h1>
 
-    <p class="text-base sm:text-lg md:text-xl text-gray-500 max-w-xl mb-8 sm:mb-12 leading-relaxed">
-      We back technical founders at the earliest stages, partnering on infrastructure the world will rely on for decades.
+    <p class="text-base sm:text-lg md:text-xl text-gray-500 max-w-2xl mb-8 sm:mb-12 leading-relaxed">
+      We invest in frontier technology companies. Our focus spans six sectors where we believe challengers can create durable value.
     </p>
 
-    <!-- Sector list -->
-    <div class="flex flex-wrap gap-x-3 sm:gap-x-4 gap-y-2">
+    <!-- Sector pills -->
+    <div class="flex flex-wrap gap-2 sm:gap-3 mb-16">
       {% for sector in site.sectors %}
-      <span class="text-xs sm:text-sm font-mono font-medium" style="color: {{ sector.color }}">{{ sector.name | lower }}</span>
-      {% if not loop.last %}<span class="text-gray-300">·</span>{% endif %}
+      <span class="px-3 py-1.5 rounded-full text-xs font-medium border {% if sector.deemphasized %}border-black/5 text-gray-400{% else %}border-black/10 text-gray-600{% endif %}" style="{% if not sector.deemphasized %}background: {{ sector.color }}10; border-color: {{ sector.color }}30;{% endif %}">
+        {{ sector.name }}
+      </span>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- Portfolio Preview -->
+<!-- What We Look For -->
 <section class="py-16 sm:py-24 border-t border-black/10">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between mb-8 sm:mb-12">
-      <p class="font-mono text-xs uppercase tracking-widest text-gray-400">Portfolio</p>
-      <a href="/portfolio/" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">View all →</a>
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-24">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-4">What We Look For</p>
+        <h2 class="font-sans font-light tracking-tighter text-2xl sm:text-3xl md:text-4xl text-gray-900" style="line-height: 0.95;">
+          The companies we back share common traits
+        </h2>
+      </div>
+      <div>
+        <ul class="space-y-4 text-gray-600">
+          <li class="flex items-start gap-3">
+            <span class="text-indigo-500 mt-0.5 flex-shrink-0">—</span>
+            <span><strong class="text-gray-900">Obsessed founders</strong> with a deeply personal motivation to succeed</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-indigo-500 mt-0.5 flex-shrink-0">—</span>
+            <span><strong class="text-gray-900">Big swings</strong> — we don't do incremental</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-indigo-500 mt-0.5 flex-shrink-0">—</span>
+            <span><strong class="text-gray-900">Clear view</strong> on the pathway to success (<em>coup d'œil</em>)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-indigo-500 mt-0.5 flex-shrink-0">—</span>
+            <span><strong class="text-gray-900">Convincing logic</strong> for achieving sustained competitive advantage</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-indigo-500 mt-0.5 flex-shrink-0">—</span>
+            <span><strong class="text-gray-900">Interested in help</strong> if it improves odds of success</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-indigo-500 mt-0.5 flex-shrink-0">—</span>
+            <span><strong class="text-gray-900">Kindness</strong> — founders and teams must be kind at heart</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Selected Portfolio -->
+<section class="py-16 sm:py-24 border-t border-black/10 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between mb-10">
+      <p class="font-mono text-xs uppercase tracking-widest text-gray-400">Selected Portfolio</p>
+      <a href="/portfolio/" class="text-sm text-gray-500 hover:text-gray-900 transition-colors group">
+        View all <span class="inline-block group-hover:translate-x-1 transition-transform">→</span>
+      </a>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+    <!-- Compact logo grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
       {% for company in portfolio.companies %}
       <a href="{{ company.url or '#' }}"
-         class="group p-4 sm:p-6 rounded-lg border border-black/10 hover:border-black/20 bg-gray-50 transition-all {% if not company.url %}cursor-default{% endif %}"
-         {% if company.url %}target="_blank" rel="noopener"{% endif %}>
-        <div class="flex items-start justify-between mb-2">
-          {% if company.logo %}
-          <div class="w-14 h-14 rounded-lg overflow-hidden bg-white border border-black/10 flex-shrink-0">
-            <img src="{{ company.logo }}" alt="{{ company.name }} logo" class="w-full h-full object-contain p-2">
-          </div>
-          {% endif %}
-          <span class="font-mono text-xs font-medium" style="color: {{ company.color }}">{{ company.code }}</span>
-        </div>
-        <h3 class="font-sans font-black uppercase tracking-tight text-xl sm:text-2xl mt-2 sm:mt-3 group-hover:translate-x-1 transition-transform text-gray-900" style="letter-spacing: -0.03em;">{{ company.name }}</h3>
-        <p class="text-xs sm:text-sm text-gray-500 mt-2 line-clamp-2">{{ company.description }}</p>
+         class="group aspect-square p-4 rounded-xl border border-black/5 bg-white hover:border-black/20 hover:shadow-sm transition-all flex items-center justify-center {% if not company.url %}cursor-default{% endif %}"
+         {% if company.url %}target="_blank" rel="noopener"{% endif %}
+         title="{{ company.name }}">
+        {% if company.logo %}
+        <img src="{{ company.logo }}" alt="{{ company.name }}" class="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity">
+        {% else %}
+        <span class="text-sm font-bold text-gray-400 group-hover:text-gray-600 transition-colors">{{ company.name }}</span>
+        {% endif %}
       </a>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- Thesis Preview -->
+<!-- CTA -->
 <section class="py-16 sm:py-24 border-t border-black/10">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid lg:grid-cols-2 gap-8 sm:gap-16">
-      <div>
-        <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-4 sm:mb-6">Our Approach</p>
-        <h2 class="font-sans font-light tracking-tighter text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6 text-gray-900" style="line-height: 0.95;">
-          Systematic capital<br>deployment
-        </h2>
-      </div>
-      <div>
-        <p class="text-gray-500 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
-          We invest in technical founders building foundational infrastructure across AI, crypto, defense, education, energy, and health. Our focus is on the earliest stages—pre-seed through Series A—where conviction matters more than consensus.
-        </p>
-        <p class="text-gray-500 leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">
-          We look for founders with deep technical expertise, clear insight into an underserved market, and the tenacity to build something that will outlast market cycles.
-        </p>
-        <a href="/thesis/" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Read our thesis →</a>
-      </div>
-    </div>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="font-sans font-light tracking-tighter text-2xl sm:text-3xl md:text-4xl mb-6 text-gray-900" style="line-height: 0.95;">
+      Building something at the frontier?
+    </h2>
+    <p class="text-gray-500 mb-8 max-w-lg mx-auto">
+      We'd love to hear from you.
+    </p>
+    <a href="/contact/" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors">
+      Get in touch
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+      </svg>
+    </a>
   </div>
 </section>
