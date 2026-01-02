@@ -9,28 +9,28 @@ permalink: /portfolio/
   <div class="max-w-6xl mx-auto px-6 lg:px-8">
     <!-- Header -->
     <div class="mb-16">
-      <p class="label mb-6">Portfolio</p>
-      <h1 class="headline-caps text-5xl md:text-6xl max-w-3xl">
+      <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-6">Portfolio</p>
+      <h1 class="font-sans font-light tracking-tighter text-5xl md:text-6xl max-w-3xl text-gray-900" style="line-height: 0.95;">
         Companies we've<br>
         backed at the frontier
       </h1>
     </div>
-    
+
     <!-- Sector filter (visual only for now) -->
     <div class="flex flex-wrap gap-3 mb-12">
-      <button class="px-4 py-2 rounded-full bg-white text-black text-xs font-bold uppercase tracking-wider">All</button>
+      <button class="px-4 py-2 rounded-full bg-gray-900 text-white text-xs font-bold uppercase tracking-wider">All</button>
       {% for sector in site.sectors %}
-      <button class="px-4 py-2 rounded-full border border-white/20 text-xs font-bold uppercase tracking-wider text-white/60 hover:border-white/40 transition-colors">{{ sector.name }}</button>
+      <button class="px-4 py-2 rounded-full border border-black/20 text-xs font-bold uppercase tracking-wider text-gray-500 hover:border-black/40 transition-colors">{{ sector.name }}</button>
       {% endfor %}
     </div>
-    
+
     <!-- Portfolio Grid -->
     <div class="grid md:grid-cols-2 gap-4">
       {% for company in portfolio %}
-      <a href="{{ company.url or '#' }}" 
-         class="group p-8 rounded-xl border border-white/10 hover:border-white/20 bg-lv-bg-secondary transition-all"
+      <a href="{{ company.url or '#' }}"
+         class="group p-8 rounded-xl border border-black/10 hover:border-black/20 bg-gray-50 transition-all"
          {% if company.url %}target="_blank" rel="noopener"{% endif %}>
-        
+
         <!-- Sector Tag -->
         <div class="flex items-center justify-between mb-6">
           <span class="inline-block px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide border"
@@ -38,17 +38,17 @@ permalink: /portfolio/
             {{ company.sector }}
           </span>
           {% if company.url %}
-          <svg class="w-5 h-5 text-white/30 group-hover:text-white/60 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-gray-300 group-hover:text-gray-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 17L17 7M17 7H7M17 7V17"/>
           </svg>
           {% endif %}
         </div>
-        
+
         <!-- Company Name -->
-        <h2 class="company-name text-4xl mb-4">{{ company.name }}</h2>
-        
+        <h2 class="font-sans font-black uppercase tracking-tight text-4xl mb-4 text-gray-900" style="letter-spacing: -0.03em;">{{ company.name }}</h2>
+
         <!-- Description -->
-        <p class="text-white/50 leading-relaxed">{{ company.description }}</p>
+        <p class="text-gray-500 leading-relaxed">{{ company.description }}</p>
       </a>
       {% endfor %}
     </div>
