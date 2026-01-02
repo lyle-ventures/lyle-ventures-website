@@ -16,12 +16,13 @@ title: Home
       We invest in frontier technology companies. Our focus spans five sectors where we believe challengers can create durable value.
     </p>
 
-    <!-- Sector tags -->
-    <div class="flex flex-wrap gap-2 sm:gap-3">
+    <!-- Sector cards -->
+    <div class="flex flex-wrap gap-3">
       {% for sector in site.sectors %}
       {% if not sector.deemphasized %}
-      <span class="text-sm text-gray-400">{{ sector.name }}</span>
-      {% if not loop.last %}<span class="text-gray-200">·</span>{% endif %}
+      <span class="px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105" style="background-color: {{ sector.color }}15; color: {{ sector.color }}; border: 1px solid {{ sector.color }}30;">
+        {{ sector.name }}
+      </span>
       {% endif %}
       {% endfor %}
     </div>
