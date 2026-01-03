@@ -18,44 +18,44 @@ permalink: /thesis/
     <!-- Traits -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
       <div class="p-5 rounded-xl border border-black/10 bg-gray-50">
-        <h3 class="text-base font-semibold mb-2 text-gray-900">Obsessed founders</h3>
+        <h3 class="text-base font-semibold mb-2 text-gray-900">Pure Obsession</h3>
         <p class="text-sm text-gray-500 leading-relaxed">
-          With a deeply personal motivation to succeed — founders who can't not build this.
+          Founders with a deeply personal motivation for their craft.
         </p>
       </div>
 
       <div class="p-5 rounded-xl border border-black/10 bg-gray-50">
-        <h3 class="text-base font-semibold mb-2 text-gray-900">Big swings</h3>
+        <h3 class="text-base font-semibold mb-2 text-gray-900">Big Swings</h3>
         <p class="text-sm text-gray-500 leading-relaxed">
-          We don't do incremental. We back founders going after transformative outcomes.
+          Ideas for changing the rules of the game.
         </p>
       </div>
 
       <div class="p-5 rounded-xl border border-black/10 bg-gray-50">
-        <h3 class="text-base font-semibold mb-2 text-gray-900">Clear view</h3>
+        <h3 class="text-base font-semibold mb-2 text-gray-900">Coup d'Œil</h3>
         <p class="text-sm text-gray-500 leading-relaxed">
-          On the pathway to success — the ability to see the whole field at a glance (<em>coup d'œil</em>).
+          Command of strategic intuition, with a clear view of the path to success.
         </p>
       </div>
 
       <div class="p-5 rounded-xl border border-black/10 bg-gray-50">
-        <h3 class="text-base font-semibold mb-2 text-gray-900">Competitive advantage</h3>
+        <h3 class="text-base font-semibold mb-2 text-gray-900">Competitive Advantage</h3>
         <p class="text-sm text-gray-500 leading-relaxed">
-          Convincing logic for achieving sustained differentiation that compounds over time.
+          Business models that could convincingly achieve sustained barriers to entry.
         </p>
       </div>
 
       <div class="p-5 rounded-xl border border-black/10 bg-gray-50">
-        <h3 class="text-base font-semibold mb-2 text-gray-900">Interested in help</h3>
+        <h3 class="text-base font-semibold mb-2 text-gray-900">Perpetual Motion</h3>
         <p class="text-sm text-gray-500 leading-relaxed">
-          If it improves odds of success. We're active partners, not passive capital.
+          Overwhelming tendency toward non-stop action.
         </p>
       </div>
 
       <div class="p-5 rounded-xl border border-black/10 bg-gray-50">
         <h3 class="text-base font-semibold mb-2 text-gray-900">Kindness</h3>
         <p class="text-sm text-gray-500 leading-relaxed">
-          Founders and teams must be kind at heart. Life is too short for anything else.
+          Founders and teams who are kind at heart... life is too short for anything less.
         </p>
       </div>
     </div>
@@ -63,10 +63,10 @@ permalink: /thesis/
     <!-- Sectors -->
     <div class="mb-16">
       <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-6">Focus Sectors</p>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div class="flex flex-wrap justify-center sm:justify-start gap-3">
         {% for sector in site.sectors %}
         {% if not sector.deemphasized %}
-        <div class="p-4 rounded-xl text-center transition-all hover:scale-105" style="background: {{ sector.color }}15; border: 1px solid {{ sector.color }}30;">
+        <div class="p-4 rounded-xl text-center transition-all hover:scale-105 w-[calc(50%-6px)] sm:w-auto sm:min-w-[140px]" style="background: {{ sector.color }}15; border: 1px solid {{ sector.color }}30;">
           <div class="w-3 h-3 rounded-full mx-auto mb-2" style="background-color: {{ sector.color }};"></div>
           <span class="text-sm font-medium" style="color: {{ sector.color }};">{{ sector.name }}</span>
         </div>

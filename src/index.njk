@@ -13,11 +13,11 @@ title: Home
     </h1>
 
     <p class="text-lg sm:text-xl text-gray-500 max-w-2xl mb-10 sm:mb-14 leading-relaxed">
-      We invest in frontier technology companies. Our focus spans five sectors where we believe challengers can create durable value.
+      We invest in frontier technology companies. Our focus spans five sectors where we believe challengers can create and capture superior value.
     </p>
 
     <!-- Sector cards -->
-    <div class="flex flex-wrap gap-3">
+    <div class="flex flex-wrap justify-center sm:justify-start gap-3">
       {% for sector in site.sectors %}
       {% if not sector.deemphasized %}
       <span class="px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105" style="background-color: {{ sector.color }}15; color: {{ sector.color }}; border: 1px solid {{ sector.color }}30;">
