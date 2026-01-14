@@ -2,7 +2,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css/output.css");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/llms.txt");
-  eleventyConfig.addPassthroughCopy({ "logos": "logos" });
+  eleventyConfig.addPassthroughCopy({ "branding/logos": "logos" });
   eleventyConfig.addPassthroughCopy({ "portfolio": "portfolio" });
   eleventyConfig.addPassthroughCopy("src/admin");
 

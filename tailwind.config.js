@@ -18,7 +18,7 @@ module.exports = {
         'sector-education': '#FF6B35',
       },
       fontFamily: {
-        'sans': ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        'sans': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
         'mono': ['"SF Mono"', '"Fira Code"', 'Consolas', 'monospace'],
       },
       letterSpacing: {

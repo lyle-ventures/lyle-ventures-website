@@ -41,7 +41,10 @@ lyle-ventures/
 │   │   ├── input.css         # Tailwind source
 │   │   └── output.css        # Compiled CSS
 │   └── index.njk             # Homepage
-├── logos/                    # Brand assets (SVG + PNG)
+├── branding/                 # Brand assets
+│   ├── LYLE-VENTURES-BRAND.md  # Full brand guidelines
+│   ├── fonts/                # Inter font files
+│   └── logos/                # Logo SVG + PNG exports
 ├── .eleventy.js              # Eleventy config
 ├── tailwind.config.js        # Tailwind config
 ├── netlify.toml              # Netlify build config
@@ -93,25 +96,28 @@ npm run build:11ty
 
 ### Typography
 
-- **Headlines**: System sans, font-weight 300, uppercase, letter-spacing -0.02em
+Primary font: **Inter** (loaded via Google Fonts, with system-ui fallback)
+
+- **Headlines**: Inter 300, uppercase, letter-spacing -0.02em
 - **Labels**: SF Mono, uppercase, letter-spacing 0.15em, 50% opacity
-- **Body**: System sans, font-weight 400
-- **Company names**: System sans, font-weight 900, uppercase, letter-spacing -0.03em
+- **Body**: Inter 400
+- **Company names**: Inter 900, uppercase, letter-spacing -0.03em
 
 ### Logo
 
 The logo is a Box + Dot hybrid: `[LV] Lyle.Ventures`
 
-- Box: 32px square with 1.5px white border, "LV" centered
-- Dot: Indigo (#6366f1) or white, with custom kerning
-- Wordmark: Semibold, tight tracking
+- Box: 32px square with 1.5px indigo border, "LV" centered (Inter 600)
+- Dot: Indigo (#6366f1), 125% size, tight kerning
+- Wordmark: Inter 500, -0.025em tracking
 
-Logo variants available:
-- `lyle-ventures-indigo-dark.svg` — Primary (dark backgrounds)
-- `lyle-ventures-white-dark.svg` — All white (dark backgrounds)
-- `lyle-ventures-mono-dark.svg` — Monochrome (dark backgrounds)
-- `lyle-ventures-black-light.svg` — Black (light backgrounds)
-- `lv-icon-*.svg` — Icon-only versions
+Logo files (in `branding/logos/`, served at `/logos/`):
+- `lyle-ventures-standard.svg` — Full wordmark (vector master)
+- `lv-icon-indigo.svg` — Favicon (vector)
+- `lv-icon-indigo-256.png` — Apple touch icon
+- `lv-linkedin-logo-indigo-outline.svg` — LinkedIn/social icon
+
+See `branding/LYLE-VENTURES-BRAND.md` for full specifications.
 
 ---
 
