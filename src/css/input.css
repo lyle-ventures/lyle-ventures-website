@@ -56,4 +56,15 @@
   .nav-link {
     @apply text-xs font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors;
   }
+
+  /* Colored verbs in subhead */
+  .verb {
+    @apply font-medium;
+  }
+
+  .verb-ai { color: #00B4D8; }
+  .verb-crypto { color: #9B5DE5; }
+  .verb-defense { color: #E63956; }
+  .verb-energy { color: #00C46A; }
+  .verb-health { color: #E5A500; }
 }
