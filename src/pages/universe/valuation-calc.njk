@@ -1,0 +1,154 @@
+---
+layout: layouts/universe.njk
+title: Valuation Calculator
+permalink: /universe/valuation-calc/
+---
+
+<section class="py-12 sm:py-16">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="mb-8">
+      <a href="/universe/" class="text-xs font-bold uppercase tracking-widest text-indigo-400 hover:text-indigo-300 transition-colors mb-3 inline-block">&larr; Dashboard</a>
+      <h1 class="text-2xl sm:text-3xl font-light uppercase tracking-tight text-gray-100 mb-2">
+        Valuation Calculator
+      </h1>
+      <p class="text-gray-400">
+        Model ownership, dilution, and potential returns across funding rounds.
+      </p>
+    </div>
+
+    <!-- Calculator -->
+    <div class="universe-card rounded-lg p-6 sm:p-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Inputs -->
+        <div class="space-y-6">
+          <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Investment Parameters</h2>
+
+          <div>
+            <label class="block text-sm text-gray-300 mb-2">Investment Amount ($)</label>
+            <input type="number" id="investmentAmount" value="100000" min="0" step="1000"
+              class="w-full bg-gray-900/50 border border-indigo-500/30 rounded-lg px-4 py-3 text-gray-100 focus:outline-none focus:border-indigo-500 transition-colors">
+          </div>
+
+          <div>
+            <label class="block text-sm text-gray-300 mb-2">Pre-Money Valuation ($)</label>
+            <input type="number" id="preMoney" value="4000000" min="0" step="100000"
+              class="w-full bg-gray-900/50 border border-indigo-500/30 rounded-lg px-4 py-3 text-gray-100 focus:outline-none focus:border-indigo-500 transition-colors">
+          </div>
+
+          <div>
+            <label class="block text-sm text-gray-300 mb-2">Expected Dilution per Future Round (%)</label>
+            <input type="number" id="dilutionPerRound" value="20" min="0" max="100" step="1"
+              class="w-full bg-gray-900/50 border border-indigo-500/30 rounded-lg px-4 py-3 text-gray-100 focus:outline-none focus:border-indigo-500 transition-colors">
+          </div>
+
+          <div>
+            <label class="block text-sm text-gray-300 mb-2">Number of Future Rounds Before Exit</label>
+            <input type="number" id="futureRounds" value="3" min="0" max="10" step="1"
+              class="w-full bg-gray-900/50 border border-indigo-500/30 rounded-lg px-4 py-3 text-gray-100 focus:outline-none focus:border-indigo-500 transition-colors">
+          </div>
+
+          <div>
+            <label class="block text-sm text-gray-300 mb-2">Exit Valuation ($)</label>
+            <input type="number" id="exitValuation" value="100000000" min="0" step="1000000"
+              class="w-full bg-gray-900/50 border border-indigo-500/30 rounded-lg px-4 py-3 text-gray-100 focus:outline-none focus:border-indigo-500 transition-colors">
+          </div>
+
+          <button onclick="calculate()"
+            class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+            Calculate
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div class="space-y-6">
+          <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Results</h2>
+
+          <div class="space-y-4">
+            <div class="p-4 rounded-lg bg-gray-900/50">
+              <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">Post-Money Valuation</p>
+              <p id="postMoney" class="text-2xl font-semibold text-gray-100">$4,100,000</p>
+            </div>
+
+            <div class="p-4 rounded-lg bg-gray-900/50">
+              <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">Initial Ownership</p>
+              <p id="initialOwnership" class="text-2xl font-semibold text-indigo-400">2.44%</p>
+            </div>
+
+            <div class="p-4 rounded-lg bg-gray-900/50">
+              <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">Ownership at Exit (after dilution)</p>
+              <p id="exitOwnership" class="text-2xl font-semibold text-indigo-400">1.25%</p>
+            </div>
+
+            <div class="p-4 rounded-lg bg-gray-900/50">
+              <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">Exit Value</p>
+              <p id="exitValue" class="text-2xl font-semibold text-green-400">$1,249,280</p>
+            </div>
+
+            <div class="p-4 rounded-lg bg-indigo-500/10 border border-indigo-500/30">
+              <p class="text-xs uppercase tracking-wider text-indigo-300 mb-1">Multiple on Invested Capital</p>
+              <p id="moic" class="text-3xl font-bold text-indigo-400">12.5x</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="mt-8 p-4 rounded-lg bg-gray-900/30 border border-gray-700/50">
+      <p class="text-xs text-gray-500">
+        <strong class="text-gray-400">Note:</strong> This calculator assumes simple dilution without participation rights,
+        liquidation preferences, or anti-dilution provisions. Actual returns may vary based on deal terms.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+function formatCurrency(num) {
+  return '$' + num.toLocaleString('en-US', { maximumFractionDigits: 0 });
+}
+
+function formatPercent(num) {
+  return num.toFixed(2) + '%';
+}
+
+function calculate() {
+  const investment = parseFloat(document.getElementById('investmentAmount').value) || 0;
+  const preMoney = parseFloat(document.getElementById('preMoney').value) || 0;
+  const dilutionPerRound = parseFloat(document.getElementById('dilutionPerRound').value) / 100 || 0;
+  const futureRounds = parseInt(document.getElementById('futureRounds').value) || 0;
+  const exitVal = parseFloat(document.getElementById('exitValuation').value) || 0;
+
+  // Calculate post-money
+  const postMoney = preMoney + investment;
+
+  // Calculate initial ownership
+  const initialOwnership = (investment / postMoney) * 100;
+
+  // Calculate ownership at exit after dilution
+  const retentionMultiplier = Math.pow(1 - dilutionPerRound, futureRounds);
+  const exitOwnership = initialOwnership * retentionMultiplier;
+
+  // Calculate exit value
+  const exitValue = (exitOwnership / 100) * exitVal;
+
+  // Calculate MOIC
+  const moic = investment > 0 ? exitValue / investment : 0;
+
+  // Update display
+  document.getElementById('postMoney').textContent = formatCurrency(postMoney);
+  document.getElementById('initialOwnership').textContent = formatPercent(initialOwnership);
+  document.getElementById('exitOwnership').textContent = formatPercent(exitOwnership);
+  document.getElementById('exitValue').textContent = formatCurrency(exitValue);
+  document.getElementById('moic').textContent = moic.toFixed(1) + 'x';
+}
+
+// Calculate on page load
+document.addEventListener('DOMContentLoaded', calculate);
+
+// Recalculate on input change
+document.querySelectorAll('input').forEach(input => {
+  input.addEventListener('input', calculate);
+});
+</script>
