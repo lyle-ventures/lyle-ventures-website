@@ -7,24 +7,79 @@ permalink: /thesis/
 
 <section class="py-16 sm:py-20">
   <div class="max-w-6xl mx-auto px-6 lg:px-8">
-    <!-- What We Believe -->
+    <!-- Hero -->
     <div class="mb-16">
-      <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-6">What We Believe</p>
-      <h1 class="font-sans font-light tracking-tighter text-4xl sm:text-5xl md:text-6xl max-w-3xl text-gray-900 mb-8" style="line-height: 0.95;">
-        Investment Thesis
+      <h1 class="font-sans font-light tracking-tighter text-4xl sm:text-5xl md:text-6xl max-w-4xl text-gray-900 mb-8" style="line-height: 0.95;">
+        We back early-stage companies building critical systems for the AI economy
       </h1>
-      <p class="text-lg sm:text-xl text-gray-500 max-w-2xl mb-10 leading-relaxed">
-        We focus on five sectors where we believe challengers can create and capture superior value.
+      <p class="text-lg sm:text-xl text-gray-500 max-w-2xl leading-relaxed">
+        Venture capital for founders reshaping how we produce intelligence, move value, provide security, and give life.
       </p>
-      <div class="flex flex-wrap justify-center sm:justify-start gap-3">
-        {% for sector in site.sectors %}
-        {% if not sector.deemphasized %}
-        <div class="p-4 rounded-xl text-center transition-all hover:scale-105 w-[calc(50%-6px)] sm:w-auto sm:min-w-[140px]" style="background: {{ sector.color }}15; border: 1px solid {{ sector.color }}30;">
-          <div class="w-3 h-3 rounded-full mx-auto mb-2" style="background-color: {{ sector.color }};"></div>
-          <span class="text-sm font-medium" style="color: {{ sector.color }};">{{ sector.name }}</span>
+    </div>
+
+    <!-- What We Believe -->
+    <div class="mb-16 pt-12 border-t border-black/10">
+      <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-6">What We Believe</p>
+      <div class="max-w-3xl space-y-6">
+        <p class="text-lg text-gray-600 leading-relaxed">
+          The current AI supercycle is the most significant transition in human history and requires the largest economic system upgrade ever attempted. This creates generational opportunity.
+        </p>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          Abundant intelligence is constrained only by physical resources and processes. Infinite digital replication redefines our understanding of scarcity.
+        </p>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          Lyle Ventures is interested in physical bottlenecks, scarce digital assets, and tech that is truly life-changing or timeless. These are the areas where we believe challengers can create and capture superior value.
+        </p>
+      </div>
+    </div>
+
+    <!-- Portfolio Categories -->
+    <div class="mb-16 pt-12 border-t border-black/10">
+      <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-6">Portfolio Categories</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-xl border border-black/10 bg-gray-50">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-3 h-3 rounded-full" style="background-color: #00D4FF;"></div>
+            <h3 class="text-lg font-semibold text-gray-900">AI Mechanicals</h3>
+          </div>
+          <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-2">Produces intelligence · Physical bottlenecks</p>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            Physical machinery that forms the mechanical layer for producing abundant intelligence. Chips, fabs, reactors, turbines, cooling systems, transformers, and so forth. Constrained by principles of physics.
+          </p>
         </div>
-        {% endif %}
-        {% endfor %}
+
+        <div class="p-6 rounded-xl border border-black/10 bg-gray-50">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-3 h-3 rounded-full" style="background-color: #AA66FF;"></div>
+            <h3 class="text-lg font-semibold text-gray-900">Scarce Crypto</h3>
+          </div>
+          <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-2">Moves value · Scarce digital assets</p>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            Assets that resiliently store value and move at high velocity with minimal friction. Fewer middlemen, more ownership. Scarce crypto assets only.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl border border-black/10 bg-gray-50">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-3 h-3 rounded-full" style="background-color: #FF3366;"></div>
+            <h3 class="text-lg font-semibold text-gray-900">Defense Tech</h3>
+          </div>
+          <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-2">Provides security · Timeless</p>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            Security is a timeless imperative. AI and robotics create new conflict vectors that require innovation and investment. Autonomous hardware and systems, cyber defense, space. Highly bespoke and gated.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl border border-black/10 bg-gray-50">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-3 h-3 rounded-full" style="background-color: #FFB800;"></div>
+            <h3 class="text-lg font-semibold text-gray-900">Health Tech</h3>
+          </div>
+          <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-2">Gives life · Life changing</p>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            AI unlocks what was previously thought impossible in human biology. Human upgrades for an age of exponential change. The gift of life.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -86,7 +141,7 @@ permalink: /thesis/
         </div>
         <div>
           <p class="font-mono text-xs uppercase tracking-widest text-gray-400 mb-2">Check Size</p>
-          <p class="text-2xl font-semibold text-gray-900">$10K – $100K</p>
+          <p class="text-2xl font-semibold text-gray-900">$10K – $25K</p>
         </div>
       </div>
     </div>
