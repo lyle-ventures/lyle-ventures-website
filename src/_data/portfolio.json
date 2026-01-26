@@ -2,8 +2,8 @@
   "companies": [
     {
       "name": "EloraHQ",
-      "sector": "AI",
-      "code": "AI",
+      "sector": "AI Mechanicals",
+      "code": "AIM",
       "color": "#00B4D8",
       "description": "EloraHQ is an advanced AI-powered care assistant that offers 24/7 personalized support, creates care plans, and so much more.",
       "url": "https://elorahq.com",
@@ -11,7 +11,7 @@
     },
     {
       "name": "Mearas",
-      "sector": "Defense",
+      "sector": "Defense Tech",
       "code": "DEF",
       "color": "#E63956",
       "description": "Mearas is pioneering electric off-road vehicles for civilian and military use. Making optionally manned, AI capable vehicles for the future today.",
@@ -29,26 +29,26 @@
     },
     {
       "name": "Stealth Nuclear Project",
-      "sector": "Energy",
-      "code": "NRG",
-      "color": "#00C46A",
+      "sector": "AI Mechanicals",
+      "code": "AIM",
+      "color": "#00B4D8",
       "description": "TBA",
       "url": null,
       "logo": "/portfolio/Stealth logo.png"
     },
     {
       "name": "SVRN",
-      "sector": "Health",
-      "code": "BIO",
-      "color": "#E5A500",
+      "sector": "Health Tech",
+      "code": "HLT",
+      "color": "#00C46A",
       "description": "SVRN is a community passionate about offering long-term solutions to accelerate biomedical innovation.",
       "url": "https://www.svrnenterprises.com",
       "logo": "/portfolio/SVRN logo.jpg"
     },
     {
       "name": "Valley Arcade Games",
-      "sector": "Crypto",
-      "code": "CRY",
+      "sector": "Scarce Crypto",
+      "code": "SCR",
       "color": "#9B5DE5",
       "description": "Valley connects gamers to the Blockchain via our physical arcade cabinets. Valley develops and publishes games.",
       "url": "https://www.valley-arcade.com",
