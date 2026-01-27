@@ -6,13 +6,27 @@ permalink: /universe/macro/
 
 {#
   ============================================================================
-  MACRO CYCLE DASHBOARD - Live Data Display
+  MACRO CYCLE DASHBOARD v2.0 - GMI/Bittel Framework
   ============================================================================
-  All data fetched live from FRED API via Cloudflare Worker proxy.
-  ISM PMI requires manual input (removed from FRED in 2016).
 
-  Data Source: FRED (Federal Reserve Economic Data)
-  Proxy: https://fred-proxy.ethan-109.workers.dev
+  Data Sources:
+  - FRED: US M2, Net Liquidity, Bank Lending, Buffett Indicator, Financial Conditions
+  - ECB: Euro Area M3 (via proxy)
+  - IMF: China M2 (via proxy)
+  - Manual: ISM Manufacturing PMI
+
+  Proxy: https://fred-proxy.ethan-109.workers.dev (or new global-macro-proxy)
+
+  Scorecard (100% weight total):
+  - Global M2 YoY: 15%
+  - Net Liquidity YoY: 15%
+  - Bank Lending YoY: 10%
+  - Trade-Weighted Dollar: 10%
+  - HY Credit Spread: 10%
+  - Yield Curve (10Y-2Y): 10%
+  - ISM Manufacturing: 10%
+  - Buffett Indicator: 10%
+  - Manufacturing Composite: 10%
   ============================================================================
 #}
 
@@ -24,7 +38,7 @@ permalink: /universe/macro/
         <div>
           <a href="/universe/" class="text-xs text-indigo-400 hover:text-indigo-300 mb-1 inline-block">&larr; Dashboard</a>
           <h1 class="text-xl font-semibold text-gray-100">Macro Cycle Dashboard</h1>
-          <p class="text-xs text-gray-500 mt-1">GMI/Bittel Framework | <span id="data-status" class="text-yellow-400">Loading...</span></p>
+          <p class="text-xs text-gray-500 mt-1">GMI/Bittel Framework v2.0 | <span id="data-status" class="text-yellow-400">Loading...</span></p>
         </div>
         <div class="flex flex-wrap gap-4 sm:gap-6 text-center">
           <div>
@@ -91,18 +105,89 @@ permalink: /universe/macro/
 
         <!-- Key Metrics Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- Global M2 -->
+          <div class="universe-card rounded-lg p-5">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">Global M2</h3>
+              <span id="m2-signal" class="text-xs px-2 py-0.5 rounded bg-gray-500/20 text-gray-400">--</span>
+            </div>
+            <p id="global-m2" class="text-2xl font-bold text-gray-100">$--T</p>
+            <p class="text-xs text-gray-500 mt-1">US + Euro + Japan + China</p>
+            <div class="mt-3 pt-3 border-t border-gray-700/50">
+              <div class="flex justify-between text-xs">
+                <span class="text-gray-500">YoY Change</span>
+                <span id="m2-yoy" class="text-gray-400">--%</span>
+              </div>
+              <div class="grid grid-cols-4 gap-1 mt-2 text-xs">
+                <div class="text-center">
+                  <p class="text-gray-600">US</p>
+                  <p id="m2-us-yoy" class="text-gray-400">--%</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-gray-600">EU</p>
+                  <p id="m2-eu-yoy" class="text-gray-400">--%</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-gray-600">JP</p>
+                  <p id="m2-jp-yoy" class="text-gray-400">--%</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-gray-600">CN</p>
+                  <p id="m2-cn-yoy" class="text-gray-400">--%</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Net Liquidity -->
           <div class="universe-card rounded-lg p-5">
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">US Net Liquidity</h3>
-              <span id="liq-signal" class="text-xs px-2 py-0.5 rounded bg-green-500/20 text-green-400">--</span>
+              <span id="liq-signal" class="text-xs px-2 py-0.5 rounded bg-gray-500/20 text-gray-400">--</span>
             </div>
             <p id="net-liquidity" class="text-2xl font-bold text-gray-100">$--</p>
             <p class="text-xs text-gray-500 mt-1">Fed Balance Sheet - TGA - RRP</p>
             <div class="mt-3 pt-3 border-t border-gray-700/50">
               <div class="flex justify-between text-xs">
                 <span class="text-gray-500">YoY Change</span>
-                <span id="liq-yoy" class="text-green-400">--%</span>
+                <span id="liq-yoy" class="text-gray-400">--%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bank Lending -->
+          <div class="universe-card rounded-lg p-5">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">Bank Lending</h3>
+              <span id="lending-signal" class="text-xs px-2 py-0.5 rounded bg-gray-500/20 text-gray-400">--</span>
+            </div>
+            <p id="bank-lending" class="text-2xl font-bold text-gray-100">$--T</p>
+            <p class="text-xs text-gray-500 mt-1">Total Loans & Leases</p>
+            <div class="mt-3 pt-3 border-t border-gray-700/50">
+              <div class="flex justify-between text-xs">
+                <span class="text-gray-500">YoY Change</span>
+                <span id="lending-yoy" class="text-gray-400">--%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Buffett Indicator -->
+          <div class="universe-card rounded-lg p-5">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">Buffett Indicator</h3>
+              <span id="buffett-signal" class="text-xs px-2 py-0.5 rounded bg-gray-500/20 text-gray-400">--</span>
+            </div>
+            <p id="buffett-value" class="text-2xl font-bold text-gray-100">--%</p>
+            <p class="text-xs text-gray-500 mt-1">Total Market Cap / GDP</p>
+            <div class="mt-3 pt-3 border-t border-gray-700/50 grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <p class="text-gray-500">Wilshire 5000</p>
+                <p id="wilshire-value" class="text-gray-300">$--T</p>
+              </div>
+              <div>
+                <p class="text-gray-500">GDP</p>
+                <p id="gdp-value" class="text-gray-300">$--T</p>
               </div>
             </div>
           </div>
@@ -111,7 +196,7 @@ permalink: /universe/macro/
           <div class="universe-card rounded-lg p-5">
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">Financial Conditions</h3>
-              <span id="fci-signal" class="text-xs px-2 py-0.5 rounded bg-green-500/20 text-green-400">--</span>
+              <span id="fci-signal" class="text-xs px-2 py-0.5 rounded bg-gray-500/20 text-gray-400">--</span>
             </div>
             <p id="fci-score" class="text-2xl font-bold text-gray-100">--</p>
             <p class="text-xs text-gray-500 mt-1">Composite Index (0-100)</p>
@@ -135,7 +220,7 @@ permalink: /universe/macro/
           <div class="universe-card rounded-lg p-5">
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">Business Cycle</h3>
-              <span id="mfg-signal" class="text-xs px-2 py-0.5 rounded bg-yellow-500/20 text-yellow-400">--</span>
+              <span id="mfg-signal" class="text-xs px-2 py-0.5 rounded bg-gray-500/20 text-gray-400">--</span>
             </div>
             <p id="ism-value" class="text-2xl font-bold text-gray-100">--</p>
             <p class="text-xs text-gray-500 mt-1">ISM Manufacturing PMI</p>
@@ -145,183 +230,155 @@ permalink: /universe/macro/
                 <span id="mfg-composite" class="text-gray-300">--</span>
               </div>
               <div class="flex justify-between text-xs">
-                <span class="text-gray-500">ISM 3Mo Momentum</span>
-                <span id="ism-momentum" class="text-gray-300">--</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- BTC Analysis -->
-          <div class="universe-card rounded-lg p-5">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">BTC vs Fair Value</h3>
-              <span id="btc-signal" class="text-xs px-2 py-0.5 rounded bg-green-500/20 text-green-400">--</span>
-            </div>
-            <p id="btc-discount" class="text-2xl font-bold text-green-400">--</p>
-            <p class="text-xs text-gray-500 mt-1">Discount to liquidity-implied FV</p>
-            <div class="mt-3 pt-3 border-t border-gray-700/50">
-              <div class="flex justify-between text-xs">
-                <span class="text-gray-500">Fair Value</span>
-                <span id="btc-fair-value" class="text-gray-300">$--</span>
+                <span class="text-gray-500">Capacity Util</span>
+                <span id="cap-util" class="text-gray-300">--%</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Manufacturing Secondary Indicators -->
-        <div class="universe-card rounded-lg p-6">
-          <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Manufacturing Indicators (FRED)</h2>
-          <div class="grid grid-cols-3 gap-4 text-center">
+        <!-- Manual Input Panel -->
+        <div class="universe-card rounded-lg p-5">
+          <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Manual Inputs</h3>
+          <p class="text-xs text-gray-500 mb-4">ISM PMI data is not available via FRED API. Enter current values from <a href="https://www.ismworld.org/supply-management-news-and-reports/reports/ism-report-on-business/" target="_blank" class="text-indigo-400 hover:text-indigo-300">ISM World</a>.</p>
+          <div class="grid grid-cols-2 gap-4">
             <div>
-              <p class="text-xs text-gray-500 mb-1">Industrial Prod</p>
-              <p id="ipman-value" class="text-lg font-bold text-gray-100">--</p>
-              <p id="ipman-yoy" class="text-xs text-gray-400">YoY: --%</p>
+              <label class="block text-xs text-gray-400 mb-1">ISM Manufacturing PMI</label>
+              <input type="number" id="input-ism" step="0.1" placeholder="e.g. 49.2"
+                class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-gray-100 text-sm focus:outline-none focus:border-indigo-500"
+                onchange="MacroApp.setISM(this.value)">
             </div>
             <div>
-              <p class="text-xs text-gray-500 mb-1">Capacity Util</p>
-              <p id="mcumfn-value" class="text-lg font-bold text-gray-100">--%</p>
-              <p id="mcumfn-signal" class="text-xs text-gray-400">--</p>
-            </div>
-            <div>
-              <p class="text-xs text-gray-500 mb-1">Durable Orders</p>
-              <p id="dgorder-value" class="text-lg font-bold text-gray-100">--</p>
-              <p id="dgorder-yoy" class="text-xs text-gray-400">YoY: --%</p>
+              <label class="block text-xs text-gray-400 mb-1">Previous Month ISM</label>
+              <input type="number" id="input-ism-prev" step="0.1" placeholder="e.g. 48.4"
+                class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-gray-100 text-sm focus:outline-none focus:border-indigo-500"
+                onchange="MacroApp.setISMPrev(this.value)">
             </div>
           </div>
-        </div>
-
-        <!-- Full Scorecard -->
-        <div class="universe-card rounded-lg p-6">
-          <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Indicator Scorecard</h2>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-gray-700">
-                  <th class="text-left py-2 text-gray-500 font-medium">Indicator</th>
-                  <th class="text-right py-2 text-gray-500 font-medium">Value</th>
-                  <th class="text-right py-2 text-gray-500 font-medium">Signal</th>
-                  <th class="text-right py-2 text-gray-500 font-medium">Weight</th>
-                  <th class="text-right py-2 text-gray-500 font-medium">Score</th>
-                </tr>
-              </thead>
-              <tbody id="scorecard-body">
-                <tr><td colspan="5" class="py-4 text-center text-gray-500">Loading FRED data...</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <button onclick="MacroApp.calculate()"
+            class="mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded text-sm font-medium text-white transition-colors">
+            Recalculate
+          </button>
         </div>
       </div>
 
-      <!-- Right Column: Controls & Info -->
+      <!-- Right Column: Scorecard -->
       <div class="space-y-6">
-
-        <!-- ISM PMI Input -->
-        <div class="universe-card rounded-lg p-6">
-          <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">ISM Manufacturing PMI</h2>
-          <p class="text-xs text-gray-500 mb-3">Not available on FRED. Enter latest value:</p>
-          <div class="space-y-3">
-            <div class="flex gap-2">
-              <input type="number" id="ism-input" step="0.1" value="" placeholder="e.g. 49.2" class="flex-1 bg-gray-900/50 border border-indigo-500/30 rounded px-3 py-2 text-gray-100 text-lg font-mono focus:outline-none focus:border-indigo-500">
-              <button onclick="MacroApp.updateIsm()" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded text-sm transition-colors">
-                Set
-              </button>
-            </div>
-            <div class="text-xs text-gray-500 space-y-1">
-              <p class="font-semibold text-gray-400">Find latest ISM PMI:</p>
-              <a href="https://www.investing.com/economic-calendar/ism-manufacturing-pmi-173" target="_blank" class="block text-indigo-400 hover:text-indigo-300">→ Investing.com</a>
-              <a href="https://tradingeconomics.com/united-states/business-confidence" target="_blank" class="block text-indigo-400 hover:text-indigo-300">→ Trading Economics</a>
-              <a href="https://www.ismworld.org" target="_blank" class="block text-indigo-400 hover:text-indigo-300">→ ISM Official (paid)</a>
-            </div>
+        <div class="universe-card rounded-lg p-5">
+          <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Scorecard</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs">
+              <thead>
+                <tr class="text-gray-500 border-b border-gray-700">
+                  <th class="pb-2 text-left font-medium">Indicator</th>
+                  <th class="pb-2 text-right font-medium">Value</th>
+                  <th class="pb-2 text-right font-medium">Signal</th>
+                  <th class="pb-2 text-right font-medium">Wt</th>
+                  <th class="pb-2 text-right font-medium">Score</th>
+                </tr>
+              </thead>
+              <tbody id="scorecard-body">
+                <tr><td colspan="5" class="py-4 text-center text-gray-500">Loading...</td></tr>
+              </tbody>
+              <tfoot>
+                <tr class="border-t border-gray-700 font-semibold">
+                  <td class="pt-3 text-gray-300">Total</td>
+                  <td></td>
+                  <td></td>
+                  <td id="total-weight" class="pt-3 text-right text-gray-400">100%</td>
+                  <td id="total-score" class="pt-3 text-right text-green-400">--</td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </div>
 
-        <!-- BTC Price Input -->
-        <div class="universe-card rounded-lg p-6">
-          <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">BTC Price</h2>
-          <div class="space-y-3">
-            <input type="number" id="btc-input" value="" placeholder="Loading..." class="w-full bg-gray-900/50 border border-indigo-500/30 rounded px-3 py-2 text-gray-100 text-lg font-mono focus:outline-none focus:border-indigo-500">
-            <div class="grid grid-cols-2 gap-2">
-              <button onclick="MacroApp.updateBtc()" class="py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded text-sm transition-colors">
-                Update
-              </button>
-              <button onclick="MacroApp.fetchBtc()" class="py-2 bg-gray-700/50 hover:bg-gray-700 text-gray-300 rounded text-sm transition-colors">
-                Refresh
-              </button>
+        <!-- Data Sources -->
+        <div class="universe-card rounded-lg p-5">
+          <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Data Sources</h3>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between">
+              <span class="text-gray-500">Global M2</span>
+              <span class="text-gray-400">FRED + ECB + IMF</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-500">Net Liquidity</span>
+              <span class="text-gray-400">FRED</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-500">Bank Lending</span>
+              <span class="text-gray-400">FRED: TOTLL</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-500">Buffett Indicator</span>
+              <span class="text-gray-400">FRED: WILL5000 / GDP</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-500">ISM PMI</span>
+              <span class="text-gray-400">Manual Input</span>
             </div>
           </div>
         </div>
 
         <!-- Debug Panel -->
-        <div class="universe-card rounded-lg p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400">API Debug</h2>
-            <button onclick="MacroApp.refreshAll()" class="text-xs px-2 py-1 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-400 rounded transition-colors">
-              Refresh All
-            </button>
-          </div>
-          <div class="space-y-2 text-xs">
-            <div class="flex justify-between text-gray-500">
-              <span>Proxy URL:</span>
-              <span id="debug-proxy" class="text-gray-400 font-mono truncate ml-2">--</span>
+        <details class="universe-card rounded-lg">
+          <summary class="p-4 cursor-pointer text-xs font-bold uppercase tracking-widest text-gray-400">
+            Debug Info
+          </summary>
+          <div class="px-4 pb-4 space-y-2 text-xs">
+            <div class="flex justify-between">
+              <span class="text-gray-500">Proxy URL</span>
+              <span id="debug-proxy" class="text-gray-400 font-mono text-[10px]">--</span>
             </div>
-            <div class="border-t border-gray-700/50 pt-2 mt-2">
-              <p class="text-gray-500 mb-2">FRED Series Status:</p>
-              <div id="debug-series" class="space-y-1 font-mono text-xs max-h-48 overflow-y-auto">
-                <p class="text-gray-600">Loading...</p>
-              </div>
+            <div class="flex justify-between">
+              <span class="text-gray-500">Last Updated</span>
+              <span id="debug-timestamp" class="text-gray-400">--</span>
             </div>
-            <div class="border-t border-gray-700/50 pt-2 mt-2">
-              <div class="flex justify-between text-gray-500">
-                <span>BTC Source:</span>
-                <span id="debug-btc" class="text-gray-400">--</span>
-              </div>
-              <div class="flex justify-between text-gray-500 mt-1">
-                <span>ISM Source:</span>
-                <span id="debug-ism" class="text-gray-400">Manual input</span>
-              </div>
+            <div id="debug-series" class="mt-2 space-y-1 font-mono text-[10px] text-gray-500 max-h-48 overflow-y-auto">
+              <!-- Populated by JS -->
             </div>
           </div>
-        </div>
-
-        <!-- Interpretation Guide -->
-        <div class="universe-card rounded-lg p-6">
-          <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Interpretation</h2>
-          <div class="space-y-3 text-xs text-gray-400">
-            <div>
-              <p class="text-green-400 font-semibold">SUMMER (75-100)</p>
-              <p>Peak expansion. Risk assets favored.</p>
-            </div>
-            <div>
-              <p class="text-yellow-400 font-semibold">SPRING (55-75)</p>
-              <p>Recovery phase. Accumulate risk.</p>
-            </div>
-            <div>
-              <p class="text-orange-400 font-semibold">FALL (35-55)</p>
-              <p>Late cycle. Reduce risk.</p>
-            </div>
-            <div>
-              <p class="text-blue-400 font-semibold">WINTER (0-35)</p>
-              <p>Contraction. Defensive posture.</p>
-            </div>
-          </div>
-        </div>
+        </details>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- Error Modal -->
-<div id="error-modal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
-  <div class="universe-card rounded-lg p-6 max-w-md mx-4">
-    <h3 class="text-lg font-bold text-red-400 mb-3">Data Load Error</h3>
-    <p id="error-message" class="text-sm text-gray-300 mb-4">Failed to load required data.</p>
-    <div class="flex gap-3">
-      <button onclick="MacroApp.refreshAll()" class="flex-1 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded text-sm transition-colors">
-        Retry
-      </button>
-      <button onclick="document.getElementById('error-modal').classList.add('hidden')" class="flex-1 py-2 bg-gray-700/50 hover:bg-gray-700 text-gray-300 rounded text-sm transition-colors">
-        Dismiss
-      </button>
+    <!-- Methodology -->
+    <div class="mt-8 universe-card rounded-lg p-6">
+      <h3 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Methodology: GMI/Bittel Framework v2.0</h3>
+      <div class="grid md:grid-cols-2 gap-6 text-xs text-gray-400">
+        <div>
+          <h4 class="text-gray-300 font-semibold mb-2">Liquidity Indicators (30%)</h4>
+          <ul class="space-y-1 list-disc list-inside">
+            <li><strong>Global M2 YoY (15%):</strong> Sum of US, Euro, Japan, China M2 converted to USD. Primary driver of crypto bull markets.</li>
+            <li><strong>Net Liquidity YoY (15%):</strong> Fed Balance Sheet minus TGA and RRP. Direct measure of dollar liquidity.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-gray-300 font-semibold mb-2">Credit Indicators (20%)</h4>
+          <ul class="space-y-1 list-disc list-inside">
+            <li><strong>Bank Lending YoY (10%):</strong> Total bank loans and leases. Credit impulse indicator.</li>
+            <li><strong>HY Credit Spread (10%):</strong> Risk appetite gauge. Tight spreads = risk-on.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-gray-300 font-semibold mb-2">Financial Conditions (20%)</h4>
+          <ul class="space-y-1 list-disc list-inside">
+            <li><strong>DXY Trade-Weighted Dollar (10%):</strong> Dollar weakness supports risk assets globally.</li>
+            <li><strong>Yield Curve 10Y-2Y (10%):</strong> Steepening curve = improving growth outlook.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-gray-300 font-semibold mb-2">Valuation & Activity (30%)</h4>
+          <ul class="space-y-1 list-disc list-inside">
+            <li><strong>ISM Manufacturing (10%):</strong> Business cycle leading indicator. Manual input required.</li>
+            <li><strong>Buffett Indicator (10%):</strong> Market cap / GDP. Valuation warning when >200%.</li>
+            <li><strong>Mfg Composite (10%):</strong> FRED industrial production, capacity utilization, durable goods.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-4 pt-4 border-t border-gray-700/50 text-xs text-gray-500">
+        <p><strong>Seasons:</strong> Winter (0-35) = Defensive | Spring (35-55) = Accumulate | Summer (55-75) = Risk On | Fall (75-100) = Reduce Risk</p>
+      </div>
     </div>
   </div>
 </div>
@@ -332,62 +389,61 @@ permalink: /universe/macro/
 // ============================================================================
 const FRED_PROXY_URL = 'https://fred-proxy.ethan-109.workers.dev';
 
-// FRED series configuration
-// Note: NAPM (ISM PMI) was removed from FRED in 2016 - requires manual input
+// FRED series configuration - expanded for v2.0
 const FRED_SERIES = [
   // Liquidity
   { id: 'WALCL', key: 'fedBalanceSheet', limit: 55, label: 'Fed Balance Sheet' },
   { id: 'WTREGEN', key: 'tga', limit: 5, label: 'Treasury General Account' },
   { id: 'RRPONTSYD', key: 'rrp', limit: 5, label: 'Reverse Repo' },
+  // M2 Money Supply
+  { id: 'M2SL', key: 'm2us', limit: 15, label: 'US M2 Money Supply' },
+  // Bank Lending
+  { id: 'TOTLL', key: 'bankLending', limit: 15, label: 'Total Loans & Leases' },
+  // Buffett Indicator components
+  { id: 'WILL5000PRFC', key: 'wilshire', limit: 5, label: 'Wilshire 5000 Total Market' },
+  { id: 'GDP', key: 'gdp', limit: 5, label: 'Nominal GDP' },
   // Financial Conditions
   { id: 'BAMLH0A0HYM2', key: 'hySpread', limit: 5, label: 'HY Credit Spread' },
   { id: 'T10Y2Y', key: 'yieldCurve', limit: 5, label: '10Y-2Y Yield Curve' },
   { id: 'DTWEXBGS', key: 'dxy', limit: 5, label: 'Trade-Weighted Dollar' },
-  // Manufacturing (secondary indicators to support ISM)
-  { id: 'IPMAN', key: 'ipman', limit: 13, label: 'Industrial Production: Mfg' },
+  // Manufacturing
+  { id: 'IPMAN', key: 'ipman', limit: 15, label: 'Industrial Production: Mfg' },
   { id: 'MCUMFN', key: 'mcumfn', limit: 5, label: 'Capacity Utilization: Mfg' },
-  { id: 'DGORDER', key: 'dgorder', limit: 13, label: 'Durable Goods Orders' }
+  { id: 'DGORDER', key: 'dgorder', limit: 15, label: 'Durable Goods Orders' }
 ];
 
 // ============================================================================
-// MACRO APP
+// MACRO APP v2.0
 // ============================================================================
 const MacroApp = {
-  btcPrice: null,
   ismValue: null,
   ismPrevious: null,
   macroData: {},
+  globalM2Data: null,
   debugInfo: {},
 
   async init() {
-    // Check if proxy URL is configured
     if (!FRED_PROXY_URL) {
-      this.showError('FRED_PROXY_URL is not configured. Please set the proxy URL to fetch live data.');
+      this.showError('FRED_PROXY_URL is not configured.');
       return;
     }
 
-    // Update debug panel with proxy URL
     document.getElementById('debug-proxy').textContent = FRED_PROXY_URL.replace('https://', '');
 
-    // Fetch all data in parallel
     await Promise.all([
-      this.fetchLiveMacroData(),
-      this.fetchBtc()
+      this.fetchFREDData(),
+      this.fetchGlobalM2()
     ]);
   },
 
-  async fetchLiveMacroData() {
+  async fetchFREDData() {
     try {
       document.getElementById('data-status').textContent = 'Fetching FRED data...';
       document.getElementById('data-status').className = 'text-yellow-400';
 
-      // Reset debug info
-      this.debugInfo = {};
-
-      // Fetch all series in parallel
       const results = await Promise.all(
         FRED_SERIES.map(async s => {
-          const url = `${FRED_PROXY_URL}/series/observations?series_id=${s.id}&limit=${s.limit}`;
+          const url = `${FRED_PROXY_URL}?series_id=${s.id}&limit=${s.limit}`;
           try {
             const res = await fetch(url);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -399,7 +455,6 @@ const MacroApp = {
         })
       );
 
-      // Process results and update debug panel
       let latestDate = null;
       let failedSeries = [];
       const debugHtml = [];
@@ -413,213 +468,116 @@ const MacroApp = {
           if (!isNaN(val)) {
             this.macroData[r.key] = val;
 
-            // Track latest date
-            if (!latestDate || date > latestDate) {
-              latestDate = date;
-            }
+            if (!latestDate || date > latestDate) latestDate = date;
 
-            // Store debug info
             this.debugInfo[r.id] = { value: val, date, success: true };
-            debugHtml.push(`<div class="flex justify-between"><span class="text-green-400">${r.id}</span><span class="text-gray-400">${val.toFixed(2)} (${date})</span></div>`);
+            debugHtml.push(`<div class="flex justify-between"><span class="text-green-400">${r.id}</span><span>${val.toFixed(2)} (${date})</span></div>`);
 
-            // Get YoY for Fed Balance Sheet (need observation from ~52 weeks ago)
+            // Get YoY values for series that need them
             if (r.key === 'fedBalanceSheet' && obs.length >= 52) {
-              const yoyVal = parseFloat(obs[51].value);
-              if (!isNaN(yoyVal)) {
-                this.macroData.fedBalanceSheetYoY = yoyVal;
-              }
+              this.macroData.fedBalanceSheetYoY = parseFloat(obs[51].value) || val;
             }
-
-            // Get YoY for Industrial Production
+            if (r.key === 'm2us' && obs.length >= 12) {
+              this.macroData.m2usYoY = parseFloat(obs[11].value) || val;
+            }
+            if (r.key === 'bankLending' && obs.length >= 12) {
+              this.macroData.bankLendingYoY = parseFloat(obs[11].value) || val;
+            }
             if (r.key === 'ipman' && obs.length >= 12) {
-              const yoyVal = parseFloat(obs[11].value);
-              if (!isNaN(yoyVal)) {
-                this.macroData.ipmanYoY = yoyVal;
-              }
+              this.macroData.ipmanYoY = parseFloat(obs[11].value) || val;
             }
-
-            // Get YoY for Durable Goods
             if (r.key === 'dgorder' && obs.length >= 12) {
-              const yoyVal = parseFloat(obs[11].value);
-              if (!isNaN(yoyVal)) {
-                this.macroData.dgorderYoY = yoyVal;
-              }
+              this.macroData.dgorderYoY = parseFloat(obs[11].value) || val;
             }
           } else {
             failedSeries.push(r.id);
-            this.debugInfo[r.id] = { success: false, error: 'Invalid value' };
-            debugHtml.push(`<div class="flex justify-between"><span class="text-red-400">${r.id}</span><span class="text-red-400">Invalid</span></div>`);
           }
         } else {
           failedSeries.push(r.id);
-          this.debugInfo[r.id] = { success: false, error: r.error || 'No data' };
-          debugHtml.push(`<div class="flex justify-between"><span class="text-red-400">${r.id}</span><span class="text-red-400">${r.error || 'No data'}</span></div>`);
+          debugHtml.push(`<div class="flex justify-between"><span class="text-red-400">${r.id}</span><span>Failed: ${r.error || 'No data'}</span></div>`);
         }
       });
 
-      // Update debug panel
       document.getElementById('debug-series').innerHTML = debugHtml.join('');
+      document.getElementById('debug-timestamp').textContent = latestDate || '--';
 
-      // Check if we have all required data (excluding ISM which is manual)
-      const requiredSeries = ['WALCL', 'WTREGEN', 'RRPONTSYD', 'BAMLH0A0HYM2', 'T10Y2Y', 'DTWEXBGS'];
-      const missingRequired = failedSeries.filter(s => requiredSeries.includes(s));
-
-      if (missingRequired.length > 0) {
-        this.showError(`Failed to fetch required FRED series: ${missingRequired.join(', ')}`);
-        document.getElementById('data-status').textContent = `Error | ${missingRequired.length} series failed`;
-        document.getElementById('data-status').className = 'text-red-400';
-        return;
+      if (failedSeries.length === 0) {
+        document.getElementById('data-status').textContent = `Live data as of ${latestDate}`;
+        document.getElementById('data-status').className = 'text-green-400';
+      } else {
+        document.getElementById('data-status').textContent = `Partial data (${failedSeries.length} series failed)`;
+        document.getElementById('data-status').className = 'text-orange-400';
       }
 
-      // Update status with latest date
-      if (latestDate) {
-        const ismStatus = this.ismValue ? '' : ' | Enter ISM';
-        document.getElementById('data-status').textContent = `Live | Latest: ${latestDate}${ismStatus}`;
-        document.getElementById('data-status').className = this.ismValue ? 'text-green-400' : 'text-yellow-400';
-      }
-
-      // Update manufacturing indicators display
-      this.updateManufacturingDisplay();
-
-      // Calculate if we have BTC price
-      if (this.btcPrice) {
-        this.calculate();
-      }
-
-    } catch (e) {
-      console.error('Failed to fetch live FRED data:', e);
-      this.showError(`Failed to fetch FRED data: ${e.message}`);
-      document.getElementById('data-status').textContent = 'Error | Fetch failed';
+      this.calculate();
+    } catch (error) {
+      console.error('FRED fetch error:', error);
+      document.getElementById('data-status').textContent = 'Error fetching data';
       document.getElementById('data-status').className = 'text-red-400';
     }
   },
 
-  updateManufacturingDisplay() {
-    const d = this.macroData;
-
-    // Industrial Production
-    if (d.ipman) {
-      document.getElementById('ipman-value').textContent = d.ipman.toFixed(1);
-      if (d.ipmanYoY) {
-        const yoy = ((d.ipman - d.ipmanYoY) / d.ipmanYoY * 100);
-        document.getElementById('ipman-yoy').textContent = `YoY: ${yoy > 0 ? '+' : ''}${yoy.toFixed(1)}%`;
-        document.getElementById('ipman-yoy').className = yoy > 0 ? 'text-xs text-green-400' : 'text-xs text-red-400';
+  async fetchGlobalM2() {
+    // Try to fetch aggregated Global M2 from proxy
+    // Falls back to US M2 only if not available
+    try {
+      const res = await fetch(`${FRED_PROXY_URL.replace('fred-proxy', 'global-macro-proxy')}/global-m2`);
+      if (res.ok) {
+        this.globalM2Data = await res.json();
       }
+    } catch (e) {
+      console.log('Global M2 endpoint not available, using US M2 only');
+    }
+  },
+
+  setISM(val) {
+    const v = parseFloat(val);
+    if (!isNaN(v) && v > 0 && v < 100) {
+      this.ismValue = v;
+      localStorage.setItem('ism_value', v);
+    }
+  },
+
+  setISMPrev(val) {
+    const v = parseFloat(val);
+    if (!isNaN(v) && v > 0 && v < 100) {
+      this.ismPrevious = v;
+      localStorage.setItem('ism_previous', v);
+    }
+  },
+
+  loadISMFromStorage() {
+    const saved = localStorage.getItem('ism_value');
+    const savedPrev = localStorage.getItem('ism_previous');
+    if (saved) {
+      this.ismValue = parseFloat(saved);
+      document.getElementById('input-ism').value = saved;
+    }
+    if (savedPrev) {
+      this.ismPrevious = parseFloat(savedPrev);
+      document.getElementById('input-ism-prev').value = savedPrev;
+    }
+  },
+
+  calculateMfgComposite() {
+    const d = this.macroData;
+    let score = 50;
+
+    // Industrial Production YoY
+    if (d.ipman && d.ipmanYoY) {
+      const ipYoY = ((d.ipman - d.ipmanYoY) / d.ipmanYoY * 100);
+      score += ipYoY * 3;
     }
 
     // Capacity Utilization
     if (d.mcumfn) {
-      document.getElementById('mcumfn-value').textContent = d.mcumfn.toFixed(1) + '%';
-      let signal = 'Neutral';
-      if (d.mcumfn > 78) signal = 'Strong';
-      else if (d.mcumfn > 75) signal = 'Normal';
-      else if (d.mcumfn > 70) signal = 'Weak';
-      else signal = 'Very Weak';
-      document.getElementById('mcumfn-signal').textContent = signal;
+      score += (d.mcumfn - 77) * 2;
     }
 
-    // Durable Goods
-    if (d.dgorder) {
-      document.getElementById('dgorder-value').textContent = '$' + (d.dgorder / 1000).toFixed(0) + 'B';
-      if (d.dgorderYoY) {
-        const yoy = ((d.dgorder - d.dgorderYoY) / d.dgorderYoY * 100);
-        document.getElementById('dgorder-yoy').textContent = `YoY: ${yoy > 0 ? '+' : ''}${yoy.toFixed(1)}%`;
-        document.getElementById('dgorder-yoy').className = yoy > 0 ? 'text-xs text-green-400' : 'text-xs text-red-400';
-      }
-    }
-  },
-
-  updateIsm() {
-    const input = document.getElementById('ism-input');
-    const value = parseFloat(input.value);
-    if (value > 0 && value < 100) {
-      // Store previous for momentum calc (simple approach - 3 points lower as estimate)
-      this.ismPrevious = this.ismValue || (value - 1);
-      this.ismValue = value;
-      document.getElementById('debug-ism').textContent = `Manual (${value})`;
-
-      // Update status
-      const status = document.getElementById('data-status');
-      if (status.textContent.includes('Enter ISM')) {
-        status.textContent = status.textContent.replace(' | Enter ISM', '');
-        status.className = 'text-green-400';
-      }
-
-      if (this.btcPrice && Object.keys(this.macroData).length > 0) {
-        this.calculate();
-      }
-    }
-  },
-
-  updateBtc() {
-    const price = parseFloat(document.getElementById('btc-input').value);
-    if (price > 0) {
-      this.btcPrice = price;
-      document.getElementById('debug-btc').textContent = 'Manual input';
-      if (Object.keys(this.macroData).length > 0) {
-        this.calculate();
-      }
-    }
-  },
-
-  async fetchBtc() {
-    try {
-      document.getElementById('debug-btc').textContent = 'Fetching...';
-      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      if (data.bitcoin?.usd) {
-        this.btcPrice = data.bitcoin.usd;
-        document.getElementById('btc-input').value = this.btcPrice;
-        document.getElementById('debug-btc').textContent = `CoinGecko ($${this.btcPrice.toLocaleString()})`;
-
-        // Calculate if we have macro data
-        if (Object.keys(this.macroData).length > 0) {
-          this.calculate();
-        }
-      } else {
-        throw new Error('No BTC price in response');
-      }
-    } catch (e) {
-      console.error('Failed to fetch BTC price:', e);
-      document.getElementById('debug-btc').textContent = `Error: ${e.message}`;
-      document.getElementById('btc-input').placeholder = 'Enter manually';
-    }
-  },
-
-  async refreshAll() {
-    document.getElementById('error-modal').classList.add('hidden');
-    this.macroData = {};
-    this.btcPrice = null;
-    document.getElementById('btc-input').value = '';
-    await this.init();
-  },
-
-  showError(message) {
-    document.getElementById('error-message').textContent = message;
-    document.getElementById('error-modal').classList.remove('hidden');
-  },
-
-  // Calculate manufacturing composite from FRED data (0-100 scale)
-  calculateMfgComposite() {
-    const d = this.macroData;
-    let score = 50; // neutral baseline
-
-    // Industrial Production YoY contribution
-    if (d.ipman && d.ipmanYoY) {
-      const ipYoY = ((d.ipman - d.ipmanYoY) / d.ipmanYoY * 100);
-      score += ipYoY * 3; // scale: +3% YoY = +9 points
-    }
-
-    // Capacity Utilization contribution
-    if (d.mcumfn) {
-      score += (d.mcumfn - 75) * 2; // 75% is neutral, +5% = +10 points
-    }
-
-    // Durable Goods YoY contribution
+    // Durable Goods YoY
     if (d.dgorder && d.dgorderYoY) {
       const dgYoY = ((d.dgorder - d.dgorderYoY) / d.dgorderYoY * 100);
-      score += dgYoY * 1.5; // scale: +5% YoY = +7.5 points
+      score += dgYoY * 1.5;
     }
 
     return Math.max(0, Math.min(100, score));
@@ -627,12 +585,15 @@ const MacroApp = {
 
   calculate() {
     const d = this.macroData;
+    this.loadISMFromStorage();
 
-    // Ensure we have minimum required data
+    // Ensure minimum required data
     if (!d.fedBalanceSheet || !d.tga || d.rrp === undefined || !d.hySpread || d.yieldCurve === undefined || !d.dxy) {
       console.error('Missing required macro data');
       return;
     }
+
+    // === CALCULATIONS ===
 
     // Net Liquidity
     const fedBs = d.fedBalanceSheet * 1e6;
@@ -640,49 +601,76 @@ const MacroApp = {
     const rrp = d.rrp * 1e9;
     const netLiq = fedBs - tga - rrp;
 
-    // YoY change
+    // Net Liquidity YoY
     const fedBsYoY = (d.fedBalanceSheetYoY || d.fedBalanceSheet) * 1e6;
     const netLiqYoY = ((fedBs - fedBsYoY) / fedBsYoY) * 100;
 
+    // US M2 YoY
+    const m2YoY = d.m2us && d.m2usYoY ? ((d.m2us - d.m2usYoY) / d.m2usYoY * 100) : 0;
+
+    // Global M2 (use aggregated if available, otherwise US only)
+    let globalM2YoY = m2YoY;
+    let globalM2Total = d.m2us ? d.m2us / 1000 : 0; // Convert to trillions
+    if (this.globalM2Data?.globalM2) {
+      globalM2YoY = this.globalM2Data.globalM2.yoyGrowth;
+      globalM2Total = this.globalM2Data.globalM2.totalUSD / 1000;
+    }
+
+    // Bank Lending YoY
+    const lendingYoY = d.bankLending && d.bankLendingYoY
+      ? ((d.bankLending - d.bankLendingYoY) / d.bankLendingYoY * 100) : 0;
+
+    // Buffett Indicator
+    const wilshire = d.wilshire || 0;
+    const gdp = d.gdp || 1;
+    const buffettIndicator = (wilshire / gdp) * 100;
+
     // Financial Conditions Index (0-100, higher = looser)
     let fci = 50;
-    fci += (110 - d.dxy) * 2.5;  // Dollar weakness
-    fci += (5 - d.hySpread) * 6;  // Tight spreads
-    fci += d.yieldCurve * 10;  // Steep curve
+    fci += (110 - d.dxy) * 2.5;
+    fci += (5 - d.hySpread) * 6;
+    fci += d.yieldCurve * 10;
     fci = Math.max(0, Math.min(100, fci));
 
-    // BTC Fair Value (liquidity-based)
-    const baseLiq = 5.95e12;
-    const baseBtc = 90000;
-    const btcFairValue = baseBtc * Math.pow(netLiq / baseLiq, 1.4);
-    const btcDiscount = ((btcFairValue - this.btcPrice) / btcFairValue) * 100;
-
-    // Manufacturing composite from FRED
+    // Manufacturing composite
     const mfgComposite = this.calculateMfgComposite();
 
-    // ISM momentum (if available)
-    const ismMomentum = this.ismValue && this.ismPrevious ? this.ismValue - this.ismPrevious : 0;
-
-    // Calculate scores
+    // === SCORING ===
     const scores = [];
 
-    // Net Liquidity YoY (20%)
+    // 1. Global M2 YoY (15%)
+    let m2Score = 0, m2Signal = 'Neutral';
+    if (globalM2YoY > 6) { m2Score = 15; m2Signal = 'Bullish'; }
+    else if (globalM2YoY > 2) { m2Score = 7; m2Signal = 'Neutral'; }
+    else if (globalM2YoY > 0) { m2Score = 0; m2Signal = 'Caution'; }
+    else { m2Score = -8; m2Signal = 'Bearish'; }
+    scores.push({ name: 'Global M2 YoY', value: globalM2YoY.toFixed(1) + '%', signal: m2Signal, weight: 15, score: m2Score });
+
+    // 2. Net Liquidity YoY (15%)
     let liqScore = 0, liqSignal = 'Neutral';
-    if (netLiqYoY > 5) { liqScore = 20; liqSignal = 'Bullish'; }
-    else if (netLiqYoY > 0) { liqScore = 10; liqSignal = 'Neutral'; }
+    if (netLiqYoY > 5) { liqScore = 15; liqSignal = 'Bullish'; }
+    else if (netLiqYoY > 0) { liqScore = 7; liqSignal = 'Neutral'; }
     else if (netLiqYoY > -5) { liqScore = 0; liqSignal = 'Caution'; }
-    else { liqScore = -10; liqSignal = 'Bearish'; }
-    scores.push({ name: 'Net Liquidity YoY', value: netLiqYoY.toFixed(1) + '%', signal: liqSignal, weight: 20, score: liqScore });
+    else { liqScore = -8; liqSignal = 'Bearish'; }
+    scores.push({ name: 'Net Liquidity YoY', value: netLiqYoY.toFixed(1) + '%', signal: liqSignal, weight: 15, score: liqScore });
 
-    // DXY (15%)
+    // 3. Bank Lending YoY (10%)
+    let lendScore = 0, lendSignal = 'Neutral';
+    if (lendingYoY > 5) { lendScore = 10; lendSignal = 'Bullish'; }
+    else if (lendingYoY > 2) { lendScore = 5; lendSignal = 'Neutral'; }
+    else if (lendingYoY > 0) { lendScore = 0; lendSignal = 'Caution'; }
+    else { lendScore = -5; lendSignal = 'Bearish'; }
+    scores.push({ name: 'Bank Lending YoY', value: lendingYoY.toFixed(1) + '%', signal: lendSignal, weight: 10, score: lendScore });
+
+    // 4. DXY (10%)
     let dxyScore = 0, dxySignal = 'Neutral';
-    if (d.dxy < 105) { dxyScore = 15; dxySignal = 'Bullish'; }
-    else if (d.dxy < 110) { dxyScore = 7; dxySignal = 'Neutral'; }
+    if (d.dxy < 105) { dxyScore = 10; dxySignal = 'Bullish'; }
+    else if (d.dxy < 110) { dxyScore = 5; dxySignal = 'Neutral'; }
     else if (d.dxy < 115) { dxyScore = 0; dxySignal = 'Caution'; }
-    else { dxyScore = -8; dxySignal = 'Bearish'; }
-    scores.push({ name: 'Trade-Weighted Dollar', value: d.dxy.toFixed(1), signal: dxySignal, weight: 15, score: dxyScore });
+    else { dxyScore = -5; dxySignal = 'Bearish'; }
+    scores.push({ name: 'Trade-Weighted Dollar', value: d.dxy.toFixed(1), signal: dxySignal, weight: 10, score: dxyScore });
 
-    // HY Spread (10%)
+    // 5. HY Spread (10%)
     let hyScore = 0, hySignal = 'Neutral';
     if (d.hySpread < 4) { hyScore = 10; hySignal = 'Bullish'; }
     else if (d.hySpread < 5) { hyScore = 5; hySignal = 'Neutral'; }
@@ -690,7 +678,7 @@ const MacroApp = {
     else { hyScore = -5; hySignal = 'Bearish'; }
     scores.push({ name: 'HY Credit Spread', value: d.hySpread.toFixed(2) + '%', signal: hySignal, weight: 10, score: hyScore });
 
-    // Yield Curve (10%)
+    // 6. Yield Curve (10%)
     let curveScore = 0, curveSignal = 'Neutral';
     if (d.yieldCurve > 0.5) { curveScore = 10; curveSignal = 'Bullish'; }
     else if (d.yieldCurve > 0) { curveScore = 5; curveSignal = 'Neutral'; }
@@ -698,53 +686,36 @@ const MacroApp = {
     else { curveScore = -5; curveSignal = 'Bearish'; }
     scores.push({ name: '10Y-2Y Yield Curve', value: d.yieldCurve.toFixed(2) + '%', signal: curveSignal, weight: 10, score: curveScore });
 
-    // ISM or Mfg Composite (15%)
-    let mfgScore = 0, mfgSignal = 'Neutral';
-    const ismVal = this.ismValue || null;
-
+    // 7. ISM Manufacturing (10%)
+    let ismScore = 0, ismSignal = 'Neutral';
+    const ismVal = this.ismValue;
     if (ismVal) {
-      // Use ISM PMI if available
-      if (ismVal > 52) { mfgScore = 15; mfgSignal = 'Bullish'; }
-      else if (ismVal > 50) { mfgScore = 7; mfgSignal = 'Neutral'; }
-      else if (ismVal > 48) { mfgScore = 0; mfgSignal = 'Caution'; }
-      else { mfgScore = -8; mfgSignal = 'Bearish'; }
-      scores.push({ name: 'ISM Manufacturing', value: ismVal.toFixed(1), signal: mfgSignal, weight: 15, score: mfgScore });
+      if (ismVal > 52) { ismScore = 10; ismSignal = 'Bullish'; }
+      else if (ismVal > 50) { ismScore = 5; ismSignal = 'Neutral'; }
+      else if (ismVal > 48) { ismScore = 0; ismSignal = 'Caution'; }
+      else { ismScore = -5; ismSignal = 'Bearish'; }
+      scores.push({ name: 'ISM Manufacturing', value: ismVal.toFixed(1), signal: ismSignal, weight: 10, score: ismScore });
     } else {
-      // Fall back to FRED manufacturing composite
-      if (mfgComposite > 60) { mfgScore = 15; mfgSignal = 'Bullish'; }
-      else if (mfgComposite > 50) { mfgScore = 7; mfgSignal = 'Neutral'; }
-      else if (mfgComposite > 40) { mfgScore = 0; mfgSignal = 'Caution'; }
-      else { mfgScore = -8; mfgSignal = 'Bearish'; }
-      scores.push({ name: 'Mfg Composite (FRED)', value: mfgComposite.toFixed(0), signal: mfgSignal, weight: 15, score: mfgScore });
+      scores.push({ name: 'ISM Manufacturing', value: '--', signal: 'N/A', weight: 10, score: 0 });
     }
 
-    // Momentum (10%) - ISM momentum if available, otherwise mfg composite trend
-    let momScore = 0, momSignal = 'Neutral';
-    if (ismVal && ismMomentum !== 0) {
-      if (ismMomentum > 1) { momScore = 10; momSignal = 'Bullish'; }
-      else if (ismMomentum > 0) { momScore = 5; momSignal = 'Neutral'; }
-      else if (ismMomentum > -1) { momScore = 0; momSignal = 'Caution'; }
-      else { momScore = -5; momSignal = 'Bearish'; }
-      scores.push({ name: 'ISM 3Mo Momentum', value: (ismMomentum > 0 ? '+' : '') + ismMomentum.toFixed(1), signal: momSignal, weight: 10, score: momScore });
-    } else {
-      // Use capacity utilization as proxy
-      if (d.mcumfn > 78) { momScore = 10; momSignal = 'Bullish'; }
-      else if (d.mcumfn > 75) { momScore = 5; momSignal = 'Neutral'; }
-      else if (d.mcumfn > 72) { momScore = 0; momSignal = 'Caution'; }
-      else { momScore = -5; momSignal = 'Bearish'; }
-      scores.push({ name: 'Capacity Utilization', value: d.mcumfn.toFixed(1) + '%', signal: momSignal, weight: 10, score: momScore });
-    }
+    // 8. Buffett Indicator (10%)
+    let buffScore = 0, buffSignal = 'Neutral';
+    if (buffettIndicator < 150) { buffScore = 10; buffSignal = 'Bullish'; }
+    else if (buffettIndicator < 180) { buffScore = 5; buffSignal = 'Neutral'; }
+    else if (buffettIndicator < 200) { buffScore = 0; buffSignal = 'Caution'; }
+    else { buffScore = -5; buffSignal = 'Bearish'; }
+    scores.push({ name: 'Buffett Indicator', value: buffettIndicator.toFixed(0) + '%', signal: buffSignal, weight: 10, score: buffScore });
 
-    // BTC vs Fair Value (20%)
-    let btcScore = 0, btcSignal = 'Neutral';
-    if (btcDiscount > 20) { btcScore = 20; btcSignal = 'Bullish'; }
-    else if (btcDiscount > 10) { btcScore = 15; btcSignal = 'Bullish'; }
-    else if (btcDiscount > 0) { btcScore = 5; btcSignal = 'Neutral'; }
-    else if (btcDiscount > -20) { btcScore = 0; btcSignal = 'Caution'; }
-    else { btcScore = -10; btcSignal = 'Bearish'; }
-    scores.push({ name: 'BTC vs Fair Value', value: (btcDiscount > 0 ? '+' : '') + btcDiscount.toFixed(1) + '%', signal: btcSignal, weight: 20, score: btcScore });
+    // 9. Manufacturing Composite (10%)
+    let mfgScore = 0, mfgSignal = 'Neutral';
+    if (mfgComposite > 60) { mfgScore = 10; mfgSignal = 'Bullish'; }
+    else if (mfgComposite > 50) { mfgScore = 5; mfgSignal = 'Neutral'; }
+    else if (mfgComposite > 40) { mfgScore = 0; mfgSignal = 'Caution'; }
+    else { mfgScore = -5; mfgSignal = 'Bearish'; }
+    scores.push({ name: 'Mfg Composite', value: mfgComposite.toFixed(0), signal: mfgSignal, weight: 10, score: mfgScore });
 
-    // Total score
+    // === TOTALS ===
     const totalScore = scores.reduce((a, s) => a + s.score, 0);
     const maxScore = scores.reduce((a, s) => a + s.weight, 0);
     const cyclePos = 50 + (totalScore / maxScore) * 50;
@@ -759,14 +730,16 @@ const MacroApp = {
     // Update UI
     this.updateUI({
       netLiq, netLiqYoY, fci, mfgComposite,
-      btcFairValue, btcDiscount, ismMomentum,
-      scores, cyclePos, season, mainSignal,
-      liqSignal, btcSignal, mfgSignal
+      globalM2YoY, globalM2Total, lendingYoY,
+      buffettIndicator, wilshire, gdp,
+      scores, cyclePos, season, mainSignal, totalScore,
+      liqSignal, m2Signal, lendSignal, buffSignal, mfgSignal
     });
   },
 
   updateUI(data) {
     const fmt = (n) => '$' + (n / 1e12).toFixed(2) + 'T';
+    const fmtT = (n) => '$' + n.toFixed(1) + 'T';
     const d = this.macroData;
 
     // Header
@@ -774,12 +747,11 @@ const MacroApp = {
     document.getElementById('cycle-season').textContent = data.season;
     document.getElementById('main-signal').textContent = data.mainSignal;
 
-    // Season colors
     const seasonColors = { 'SUMMER': 'text-green-400', 'SPRING': 'text-yellow-400', 'FALL': 'text-orange-400', 'WINTER': 'text-blue-400' };
     document.getElementById('cycle-season').className = 'text-lg font-semibold ' + (seasonColors[data.season] || 'text-gray-400');
     document.getElementById('cycle-score').className = 'text-2xl font-bold ' + (seasonColors[data.season] || 'text-gray-400');
 
-    // Needle position
+    // Needle
     document.getElementById('cycle-needle').style.left = data.cyclePos + '%';
 
     // Probability grid
@@ -791,10 +763,36 @@ const MacroApp = {
     document.getElementById('prob-bearish').textContent = bear.toFixed(0) + '%';
 
     // Data cards
+    // Global M2
+    document.getElementById('global-m2').textContent = fmtT(data.globalM2Total);
+    document.getElementById('m2-yoy').textContent = (data.globalM2YoY > 0 ? '+' : '') + data.globalM2YoY.toFixed(1) + '%';
+    document.getElementById('m2-yoy').className = data.globalM2YoY > 0 ? 'text-green-400' : 'text-red-400';
+
+    // M2 component YoYs (if available from global endpoint)
+    if (this.globalM2Data?.globalM2?.components) {
+      const c = this.globalM2Data.globalM2.components;
+      document.getElementById('m2-us-yoy').textContent = c.us.yoyGrowth.toFixed(1) + '%';
+      document.getElementById('m2-eu-yoy').textContent = c.euro.yoyGrowth.toFixed(1) + '%';
+      document.getElementById('m2-jp-yoy').textContent = c.japan.yoyGrowth.toFixed(1) + '%';
+      document.getElementById('m2-cn-yoy').textContent = c.china.yoyGrowth.toFixed(1) + '%';
+    }
+
+    // Net Liquidity
     document.getElementById('net-liquidity').textContent = fmt(data.netLiq);
     document.getElementById('liq-yoy').textContent = (data.netLiqYoY > 0 ? '+' : '') + data.netLiqYoY.toFixed(1) + '%';
-    document.getElementById('liq-signal').textContent = data.liqSignal;
+    document.getElementById('liq-yoy').className = data.netLiqYoY > 0 ? 'text-green-400' : 'text-red-400';
 
+    // Bank Lending
+    document.getElementById('bank-lending').textContent = '$' + (d.bankLending / 1000).toFixed(2) + 'T';
+    document.getElementById('lending-yoy').textContent = (data.lendingYoY > 0 ? '+' : '') + data.lendingYoY.toFixed(1) + '%';
+    document.getElementById('lending-yoy').className = data.lendingYoY > 0 ? 'text-green-400' : 'text-red-400';
+
+    // Buffett Indicator
+    document.getElementById('buffett-value').textContent = data.buffettIndicator.toFixed(0) + '%';
+    document.getElementById('wilshire-value').textContent = '$' + (data.wilshire / 1000).toFixed(1) + 'T';
+    document.getElementById('gdp-value').textContent = '$' + (data.gdp / 1000).toFixed(1) + 'T';
+
+    // Financial Conditions
     document.getElementById('fci-score').textContent = data.fci.toFixed(0);
     document.getElementById('fci-dxy').textContent = d.dxy.toFixed(1);
     document.getElementById('fci-hy').textContent = d.hySpread.toFixed(2) + '%';
@@ -803,24 +801,29 @@ const MacroApp = {
     // ISM / Manufacturing
     document.getElementById('ism-value').textContent = this.ismValue ? this.ismValue.toFixed(1) : '--';
     document.getElementById('mfg-composite').textContent = data.mfgComposite.toFixed(0);
-    document.getElementById('ism-momentum').textContent = this.ismValue ?
-      ((data.ismMomentum > 0 ? '+' : '') + data.ismMomentum.toFixed(1)) : '--';
-    document.getElementById('mfg-signal').textContent = data.mfgSignal;
+    document.getElementById('cap-util').textContent = d.mcumfn ? d.mcumfn.toFixed(1) + '%' : '--%';
 
-    document.getElementById('btc-discount').textContent = (data.btcDiscount > 0 ? '+' : '') + data.btcDiscount.toFixed(1) + '%';
-    document.getElementById('btc-fair-value').textContent = '$' + Math.round(data.btcFairValue).toLocaleString();
-    document.getElementById('btc-signal').textContent = data.btcSignal;
-
-    // Signal badge colors
+    // Signal badges
     const signalColors = {
       'Bullish': 'bg-green-500/20 text-green-400',
       'Neutral': 'bg-yellow-500/20 text-yellow-400',
       'Caution': 'bg-orange-500/20 text-orange-400',
-      'Bearish': 'bg-red-500/20 text-red-400'
+      'Bearish': 'bg-red-500/20 text-red-400',
+      'N/A': 'bg-gray-500/20 text-gray-400'
     };
-    document.getElementById('liq-signal').className = 'text-xs px-2 py-0.5 rounded ' + (signalColors[data.liqSignal] || '');
-    document.getElementById('mfg-signal').className = 'text-xs px-2 py-0.5 rounded ' + (signalColors[data.mfgSignal] || '');
-    document.getElementById('btc-signal').className = 'text-xs px-2 py-0.5 rounded ' + (signalColors[data.btcSignal] || '');
+
+    const setSignal = (id, signal) => {
+      const el = document.getElementById(id);
+      el.textContent = signal;
+      el.className = 'text-xs px-2 py-0.5 rounded ' + (signalColors[signal] || signalColors['N/A']);
+    };
+
+    setSignal('m2-signal', data.m2Signal);
+    setSignal('liq-signal', data.liqSignal);
+    setSignal('lending-signal', data.lendSignal);
+    setSignal('buffett-signal', data.buffSignal);
+    setSignal('fci-signal', data.fci > 60 ? 'Bullish' : data.fci > 40 ? 'Neutral' : 'Caution');
+    setSignal('mfg-signal', data.mfgSignal);
 
     // Scorecard table
     document.getElementById('scorecard-body').innerHTML = data.scores.map(s => {
@@ -836,6 +839,14 @@ const MacroApp = {
         </tr>
       `;
     }).join('');
+
+    document.getElementById('total-score').textContent = (data.totalScore > 0 ? '+' : '') + data.totalScore;
+    document.getElementById('total-score').className = 'pt-3 text-right font-semibold ' + (data.totalScore > 0 ? 'text-green-400' : data.totalScore < 0 ? 'text-red-400' : 'text-gray-400');
+  },
+
+  showError(msg) {
+    document.getElementById('data-status').textContent = msg;
+    document.getElementById('data-status').className = 'text-red-400';
   }
 };
 
