@@ -1,10 +1,10 @@
 # Lyle Ventures — llms.txt
 
-> Backing creators and builders at the tech frontier.
+> Venture capital for critical systems.
 
 ## Overview
 
-Lyle Ventures is an early-stage venture capital firm founded by Ethan Lyle. We invest in frontier technology companies across six sectors where we believe challengers can create durable value.
+Lyle Ventures is a family office investing in founders reshaping how we produce intelligence, move value, provide security, and give life. We believe the current AI supercycle is the most significant transition in human history and creates generational opportunity.
 
 ## Founder
 
@@ -20,36 +20,30 @@ Lyle Ventures is an early-stage venture capital firm founded by Ethan Lyle. We i
 - Seed
 
 ### Check Size
-$10K – $100K
+$10K – $25K
 
 ### Sectors
 
-1. **Artificial Intelligence (AI)** — Machine learning, foundation models, AI infrastructure, applied AI
-2. **Crypto & Blockchain** — DeFi, infrastructure, gaming, tokenization
-3. **Defense Technology** — Dual-use technologies, autonomous systems, cybersecurity
-4. **Energy** — Nuclear, fusion, grid infrastructure, clean energy
-5. **Health** — Longevity, diagnostics, therapeutics, health infrastructure
-6. **Fund of Funds** — Strategic LP positions in aligned venture funds
+1. **AI Mechanicals** — Physical machinery that forms the mechanical layer for producing abundant intelligence. Chips, fabs, reactors, turbines, cooling systems, transformers. Constrained by principles of physics.
+2. **Defense Tech** — Security is a timeless imperative. AI and robotics create new conflict vectors requiring innovation. Autonomous hardware and systems, cyber defense, space.
+3. **Health Tech** — AI unlocks what was previously thought impossible in human biology. Human upgrades for an age of exponential change. The gift of life.
+4. **Scarce Crypto** — Assets that resiliently store value and move at high velocity with minimal friction. Fewer middlemen, more ownership. Scarce crypto assets only.
+5. **Fund of Funds** — Strategic LP positions in aligned venture funds.
 
-## Portfolio Companies
+## What We Believe
 
-- **EloraHQ** (AI) — AI-powered care assistant with 24/7 personalized support
-- **Mearas** (Defense) — Electric off-road vehicles for civilian and military use
-- **Phoenix Fund** (Fund of Funds) — VC backing Harvard's top founders at earliest stages
-- **Stealth Nuclear Project** (Energy) — TBA
-- **SVRN** (Health) — Accelerating biomedical innovation
-- **Valley Arcade Games** (Crypto) — Blockchain gaming via physical arcade cabinets
+- The current AI supercycle is the most significant transition in human history and requires the largest economic system upgrade ever attempted.
+- Abundant intelligence is constrained only by physical resources and processes. Infinite digital replication redefines our understanding of scarcity.
+- Lyle Ventures is interested in physical bottlenecks, scarce digital assets, and tech that is truly life-changing or timeless.
 
 ## What We Look For
 
-The companies we back share common traits:
-
-- **Obsessed founders** with a deeply personal motivation to succeed
-- **Big swings** — we don't do incremental
-- **Clear view** on the pathway to success (coup d'œil)
-- **Convincing logic** for achieving sustained competitive advantage
-- **Interested in help** if it improves odds of success
-- **Kindness** — founders and teams must be kind at heart
+- **Pure Obsession** — Founders with a deeply personal motivation for their craft
+- **Big Swings** — Ideas for changing the rules of the game
+- **Endgames** — Clear view of the path to success
+- **Competitive Advantage** — Business models that could convincingly achieve sustained barriers to entry
+- **Perpetual Motion** — Overwhelming tendency toward non-stop action
+- **Kindness** — Founders and teams who are kind at heart
 
 ## Contact
 
@@ -61,4 +55,4 @@ https://lyle-ventures.xyz
 
 ## Keywords
 
-venture capital, VC, frontier technology, deep tech, hard tech, AI investing, artificial intelligence, machine learning, crypto, blockchain, defense tech, energy investing, nuclear energy, health tech, seed stage, pre-seed, early stage investing, Ethan Lyle, Lyle Ventures, technology investment, startup funding, technical founders, infrastructure investing
+venture capital, VC, critical systems, frontier technology, family office, AI mechanicals, artificial intelligence, scarce crypto, blockchain, defense tech, health tech, seed stage, pre-seed, early stage investing, Ethan Lyle, Lyle Ventures, technology investment, startup funding, deep tech, hard tech

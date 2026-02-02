@@ -1,6 +1,6 @@
 module.exports = {
   title: "Lyle Ventures",
-  description: "Venture capital for creators and builders at the technology frontier.",
+  description: "Family office investing in founders building critical systems at the technology frontier.",
   url: "https://lyle-ventures.xyz",
   sectors: [
     { name: "AI Mechanicals", code: "AIM", color: "#00B4D8" },
