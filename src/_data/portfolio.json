@@ -47,9 +47,9 @@
     },
     {
       "name": "Valley Games",
-      "sector": "Scarce Crypto",
-      "code": "SCR",
-      "color": "#9B5DE5",
+      "sector": "Health Tech",
+      "code": "HLT",
+      "color": "#00C46A",
       "description": "Valley Arcade Games is a cross-platform arcade network that connects physical arcade cabinets, web/mobile games, and community-based play into a single competitive ecosystem with shared identity, shared leaderboards, and skill-based rewards.",
       "url": "https://valley.games/",
       "logo": "/portfolio/valley_ecosystem_logo.jpeg"
