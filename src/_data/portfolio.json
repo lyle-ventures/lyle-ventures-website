@@ -46,12 +46,12 @@
       "logo": "/portfolio/SVRN logo.jpg"
     },
     {
-      "name": "Valley Arcade Games",
+      "name": "Valley Games",
       "sector": "Scarce Crypto",
       "code": "SCR",
       "color": "#9B5DE5",
-      "description": "Valley connects gamers to the Blockchain via our physical arcade cabinets. Valley develops and publishes games.",
-      "url": "https://www.valley-arcade.com",
+      "description": "Valley Arcade Games is a cross-platform arcade network that connects physical arcade cabinets, web/mobile games, and community-based play into a single competitive ecosystem with shared identity, shared leaderboards, and skill-based rewards.",
+      "url": "https://valley.games/",
       "logo": "/portfolio/valley_ecosystem_logo.jpeg"
     }
   ]
