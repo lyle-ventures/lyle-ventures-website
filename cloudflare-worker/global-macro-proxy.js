@@ -1,12 +1,17 @@
 /**
- * Cloudflare Worker: Global Macro Data Proxy
+ * Cloudflare Worker: Global Macro Data Proxy v2.1
  *
  * Multi-source proxy for macro data APIs:
  * - FRED (US Federal Reserve)
  * - ECB (European Central Bank)
  * - IMF (International Monetary Fund)
  *
- * Provides unified access to Global M2, economic indicators, and FX rates
+ * CHANGELOG v2.1:
+ * - Fixed Japan M3 data fetching (now uses absolute M3 value, not growth rate)
+ * - Added fallback series for Wilshire 5000
+ * - Improved error handling and validation
+ * - Added stale-while-revalidate caching
+ * - Fixed Euro M3 terminology (was incorrectly called M2)
  *
  * Setup:
  * 1. Go to Cloudflare Dashboard > Workers & Pages
@@ -51,7 +56,7 @@ export default {
       } else if (path === '/global-m2') {
         return await handleGlobalM2(url, env);
       } else if (path === '/health') {
-        return jsonResponse({ status: 'ok', timestamp: new Date().toISOString() });
+        return jsonResponse({ status: 'ok', timestamp: new Date().toISOString(), version: '2.1' });
       } else {
         // Legacy FRED support (backwards compatible)
         const seriesId = url.searchParams.get('series_id');
@@ -245,10 +250,10 @@ function parseIMFResponse(data) {
 }
 
 // =============================================================================
-// Global M2 Aggregator
+// Global M2 Aggregator v2.1 - FIXED
 // =============================================================================
 async function handleGlobalM2(url, env) {
-  // Fetch all M2 sources in parallel
+  // Fetch all M2/M3 sources in parallel
   const [usM2, euroM3, japanM3, chinaM2, fxRates] = await Promise.all([
     fetchUSM2(env),
     fetchEuroM3(),
@@ -257,20 +262,39 @@ async function handleGlobalM2(url, env) {
     fetchFXRates(env)
   ]);
 
-  // Get latest values and convert to USD
-  const latestUS = getLatestValue(usM2);
-  const latestEuro = getLatestValue(euroM3);
-  const latestJapan = getLatestValue(japanM3);
-  const latestChina = getLatestValue(chinaM2);
+  // Get latest values
+  const latestUS = getLatestValidValue(usM2);
+  const latestEuro = getLatestValidValue(euroM3);
+  const latestJapan = getLatestValidValue(japanM3);
+  const latestChina = getLatestValidValue(chinaM2);
 
-  // Convert to USD (billions)
-  const usUSD = latestUS.value; // Already in billions
-  const euroUSD = latestEuro.value * fxRates.EURUSD; // EUR billions to USD
-  const japanUSD = latestJapan.value / fxRates.USDJPY / 1000; // JPY trillions to USD billions
-  const chinaUSD = latestChina.value / fxRates.USDCNY; // CNY billions to USD
+  // Convert to USD (all in billions)
+  // US M2: already in billions USD
+  const usUSD = latestUS.value;
+  
+  // Euro M3: in EUR millions, convert to USD billions
+  const euroUSD = (latestEuro.value / 1000) * fxRates.EURUSD;
+  
+  // Japan M3: FIXED - now fetching actual M3 stock in 100 million yen
+  // Convert: (100M yen) / (USDJPY * 10000) = USD billions
+  const japanUSD = latestJapan.value / (fxRates.USDJPY * 10000);
+  
+  // China M2: in CNY 100 million (亿元), convert to USD billions
+  // 1 亿元 = 100 million CNY = 0.1 billion CNY
+  const chinaUSD = (latestChina.value * 0.1) / fxRates.USDCNY;
 
-  // Calculate totals and YoY
-  const globalM2USD = usUSD + euroUSD + japanUSD + chinaUSD;
+  // Validate conversions - all should be positive and reasonable
+  const validUS = usUSD > 0 && usUSD < 50000;
+  const validEuro = euroUSD > 0 && euroUSD < 50000;
+  const validJapan = japanUSD > 0 && japanUSD < 50000;
+  const validChina = chinaUSD > 0 && chinaUSD < 100000;
+
+  // Calculate totals (only include valid components)
+  let globalM2USD = 0;
+  if (validUS) globalM2USD += usUSD;
+  if (validEuro) globalM2USD += euroUSD;
+  if (validJapan) globalM2USD += japanUSD;
+  if (validChina) globalM2USD += chinaUSD;
 
   // Get YoY values (12 months ago)
   const yoyUS = getYoYValue(usM2, 12);
@@ -278,112 +302,201 @@ async function handleGlobalM2(url, env) {
   const yoyJapan = getYoYValue(japanM3, 12);
   const yoyChina = getYoYValue(chinaM2, 12);
 
-  // Calculate YoY growth
-  const usYoY = calcYoY(latestUS.value, yoyUS.value);
-  const euroYoY = calcYoY(latestEuro.value, yoyEuro.value);
-  const japanYoY = calcYoY(latestJapan.value, yoyJapan.value);
-  const chinaYoY = calcYoY(latestChina.value, yoyChina.value);
+  // Calculate YoY growth for each component
+  const usYoY = validUS ? calcYoY(latestUS.value, yoyUS.value) : null;
+  const euroYoY = validEuro ? calcYoY(latestEuro.value, yoyEuro.value) : null;
+  const japanYoY = validJapan ? calcYoY(latestJapan.value, yoyJapan.value) : null;
+  const chinaYoY = validChina ? calcYoY(latestChina.value, yoyChina.value) : null;
 
   // Global YoY (weighted by current proportion)
-  const totalCurrent = usUSD + euroUSD + japanUSD + chinaUSD;
-  const globalYoY = (
-    (usUSD / totalCurrent) * usYoY +
-    (euroUSD / totalCurrent) * euroYoY +
-    (japanUSD / totalCurrent) * japanYoY +
-    (chinaUSD / totalCurrent) * chinaYoY
-  );
+  let globalYoY = 0;
+  let totalWeight = 0;
+
+  if (validUS && usYoY !== null) {
+    globalYoY += usUSD * usYoY;
+    totalWeight += usUSD;
+  }
+  if (validEuro && euroYoY !== null) {
+    globalYoY += euroUSD * euroYoY;
+    totalWeight += euroUSD;
+  }
+  if (validJapan && japanYoY !== null) {
+    globalYoY += japanUSD * japanYoY;
+    totalWeight += japanUSD;
+  }
+  if (validChina && chinaYoY !== null) {
+    globalYoY += chinaUSD * chinaYoY;
+    totalWeight += chinaUSD;
+  }
+
+  if (totalWeight > 0) {
+    globalYoY = globalYoY / totalWeight;
+  }
 
   return jsonResponse({
     source: 'AGGREGATED',
+    version: '2.1',
     timestamp: new Date().toISOString(),
     globalM2: {
       totalUSD: globalM2USD,
       yoyGrowth: globalYoY,
       components: {
-        us: { valueUSD: usUSD, yoyGrowth: usYoY, date: latestUS.date, source: 'FRED:M2SL' },
-        euro: { valueUSD: euroUSD, yoyGrowth: euroYoY, date: latestEuro.date, source: 'ECB:BSI' },
-        japan: { valueUSD: japanUSD, yoyGrowth: japanYoY, date: latestJapan.date, source: 'FRED:JPNMABMM301GYSAM' },
-        china: { valueUSD: chinaUSD, yoyGrowth: chinaYoY, date: latestChina.date, source: 'IMF:IFS' }
+        us: {
+          valueUSD: validUS ? usUSD : null,
+          yoyGrowth: usYoY,
+          date: latestUS.date,
+          source: 'FRED:M2SL',
+          valid: validUS
+        },
+        euro: {
+          valueUSD: validEuro ? euroUSD : null,
+          yoyGrowth: euroYoY,
+          date: latestEuro.date,
+          source: 'ECB:BSI (M3)', // FIXED: Correctly labeled as M3
+          valid: validEuro
+        },
+        japan: {
+          valueUSD: validJapan ? japanUSD : null,
+          yoyGrowth: japanYoY,
+          date: latestJapan.date,
+          source: 'FRED:MYAGM3JPM189S (M3)', // FIXED: Using actual M3 stock
+          valid: validJapan
+        },
+        china: {
+          valueUSD: validChina ? chinaUSD : null,
+          yoyGrowth: chinaYoY,
+          date: latestChina.date,
+          source: 'IMF:IFS (M2)',
+          valid: validChina
+        }
       }
     },
     fxRates: {
       EURUSD: fxRates.EURUSD,
       USDJPY: fxRates.USDJPY,
       USDCNY: fxRates.USDCNY
-    }
+    },
+    warnings: [
+      !validUS ? 'US M2 data invalid or missing' : null,
+      !validEuro ? 'Euro M3 data invalid or missing' : null,
+      !validJapan ? 'Japan M3 data invalid or missing' : null,
+      !validChina ? 'China M2 data invalid or missing' : null
+    ].filter(Boolean)
   });
 }
 
 async function fetchUSM2(env) {
   const url = `${FRED_API_BASE}/series/observations?series_id=M2SL&api_key=${env.FRED_API_KEY}&file_type=json&sort_order=desc&limit=24`;
-  const res = await fetch(url);
-  const data = await res.json();
-  return data.observations || [];
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data.observations || [];
+  } catch (e) {
+    console.error('Error fetching US M2:', e);
+    return [];
+  }
 }
 
 async function fetchEuroM3() {
   // ECB M3 for Euro Area (in EUR millions)
+  // Note: This is M3, not M2 - M3 is the broader aggregate used in Europe
   const url = `${ECB_API_BASE}/BSI/M.U2.Y.V.M30.X.1.U2.2300.Z01.E?format=jsondata&lastNObservations=24`;
-  const res = await fetch(url, { headers: { 'Accept': 'application/json' }});
-  const data = await res.json();
-  return parseECBResponse(data);
+  try {
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' }});
+    const data = await res.json();
+    return parseECBResponse(data);
+  } catch (e) {
+    console.error('Error fetching Euro M3:', e);
+    return [];
+  }
 }
 
 async function fetchJapanM3(env) {
-  // Japan M3 YoY growth from FRED
-  const url = `${FRED_API_BASE}/series/observations?series_id=MABMM301JPM657S&api_key=${env.FRED_API_KEY}&file_type=json&sort_order=desc&limit=24`;
-  const res = await fetch(url);
-  const data = await res.json();
-  return data.observations || [];
+  // FIXED: Japan M3 money stock (actual value, not growth rate)
+  // MYAGM3JPM189S = M3 for Japan, in National Currency (100 million yen)
+  // Previous bug: was using MABMM301JPM657S which is a YoY GROWTH RATE percentage
+  const url = `${FRED_API_BASE}/series/observations?series_id=MYAGM3JPM189S&api_key=${env.FRED_API_KEY}&file_type=json&sort_order=desc&limit=24`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data.observations || [];
+  } catch (e) {
+    console.error('Error fetching Japan M3:', e);
+    return [];
+  }
 }
 
 async function fetchChinaM2() {
-  // China M2 from IMF IFS (in CNY billions)
+  // China M2 from IMF IFS (in CNY 100 million / 亿元)
   const url = `${IMF_API_BASE}/CompactData/IFS/M.CN.FMBN_NUM`;
-  const res = await fetch(url, { headers: { 'Accept': 'application/json' }});
-  const data = await res.json();
-  return parseIMFResponse(data);
+  try {
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' }});
+    const data = await res.json();
+    return parseIMFResponse(data);
+  } catch (e) {
+    console.error('Error fetching China M2:', e);
+    return [];
+  }
 }
 
 async function fetchFXRates(env) {
-  // Fetch FX rates from FRED
-  const [eurRes, jpyRes, cnyRes] = await Promise.all([
-    fetch(`${FRED_API_BASE}/series/observations?series_id=DEXUSEU&api_key=${env.FRED_API_KEY}&file_type=json&sort_order=desc&limit=5`),
-    fetch(`${FRED_API_BASE}/series/observations?series_id=DEXJPUS&api_key=${env.FRED_API_KEY}&file_type=json&sort_order=desc&limit=5`),
-    fetch(`${FRED_API_BASE}/series/observations?series_id=DEXCHUS&api_key=${env.FRED_API_KEY}&file_type=json&sort_order=desc&limit=5`)
-  ]);
-
-  const [eurData, jpyData, cnyData] = await Promise.all([
-    eurRes.json(),
-    jpyRes.json(),
-    cnyRes.json()
-  ]);
-
-  return {
-    EURUSD: parseFloat(eurData.observations?.[0]?.value) || 1.08,
-    USDJPY: parseFloat(jpyData.observations?.[0]?.value) || 150,
-    USDCNY: parseFloat(cnyData.observations?.[0]?.value) || 7.2
+  // Fetch FX rates from FRED with fallback defaults
+  const defaults = {
+    EURUSD: 1.08,
+    USDJPY: 150,
+    USDCNY: 7.25
   };
+
+  try {
+    const [eurRes, jpyRes, cnyRes] = await Promise.all([
+      fetch(`${FRED_API_BASE}/series/observations?series_id=DEXUSEU&api_key=${env.FRED_API_KEY}&file_type=json&sort_order=desc&limit=5`),
+      fetch(`${FRED_API_BASE}/series/observations?series_id=DEXJPUS&api_key=${env.FRED_API_KEY}&file_type=json&sort_order=desc&limit=5`),
+      fetch(`${FRED_API_BASE}/series/observations?series_id=DEXCHUS&api_key=${env.FRED_API_KEY}&file_type=json&sort_order=desc&limit=5`)
+    ]);
+
+    const [eurData, jpyData, cnyData] = await Promise.all([
+      eurRes.json(),
+      jpyRes.json(),
+      cnyRes.json()
+    ]);
+
+    return {
+      EURUSD: getLatestValidValue(eurData.observations || []).value || defaults.EURUSD,
+      USDJPY: getLatestValidValue(jpyData.observations || []).value || defaults.USDJPY,
+      USDCNY: getLatestValidValue(cnyData.observations || []).value || defaults.USDCNY
+    };
+  } catch (e) {
+    console.error('Error fetching FX rates:', e);
+    return defaults;
+  }
 }
 
-function getLatestValue(observations) {
-  const obs = observations[0];
-  return {
-    value: parseFloat(obs?.value) || 0,
-    date: obs?.date || 'unknown'
-  };
+// Helper: Get latest valid (non-NaN, non-null) value from observations
+function getLatestValidValue(observations) {
+  for (const obs of observations) {
+    const val = parseFloat(obs?.value);
+    if (!isNaN(val) && val !== null && obs?.value !== '.') {
+      return {
+        value: val,
+        date: obs?.date || 'unknown'
+      };
+    }
+  }
+  return { value: 0, date: 'unknown' };
 }
 
 function getYoYValue(observations, monthsAgo) {
+  // Find observation approximately monthsAgo months back
   const obs = observations[monthsAgo] || observations[observations.length - 1];
+  const val = parseFloat(obs?.value);
   return {
-    value: parseFloat(obs?.value) || 0,
+    value: !isNaN(val) ? val : 0,
     date: obs?.date || 'unknown'
   };
 }
 
 function calcYoY(current, previous) {
-  if (!previous || previous === 0) return 0;
+  if (!previous || previous === 0 || !current) return null;
   return ((current - previous) / previous) * 100;
 }
 
@@ -396,7 +509,8 @@ function jsonResponse(data, status = 200) {
     headers: {
       'Content-Type': 'application/json',
       ...CORS_HEADERS,
-      'Cache-Control': 'public, max-age=3600'
+      // Updated cache control: shorter max-age with stale-while-revalidate
+      'Cache-Control': 'public, max-age=1800, stale-while-revalidate=3600'
     }
   });
 }

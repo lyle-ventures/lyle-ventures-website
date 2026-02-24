@@ -13,7 +13,7 @@
       "name": "Mearas",
       "sector": "Defense Tech",
       "code": "DEF",
-      "color": "#E63956",
+      "color": "#FF3366",
       "description": "Mearas is pioneering electric off-road vehicles for civilian and military use. Making optionally manned, AI capable vehicles for the future today.",
       "url": "https://mearas.us",
       "logo": "/portfolio/Mearas logo.jpg"
@@ -31,7 +31,7 @@
       "name": "Stealth Nuclear Project",
       "sector": "AI Mechanicals",
       "code": "AIM",
-      "color": "#00B4D8",
+      "color": "#00D4FF",
       "description": "TBA",
       "url": null,
       "logo": "/portfolio/Stealth logo.png"
@@ -47,9 +47,9 @@
     },
     {
       "name": "Valley Games",
-      "sector": "Health Tech",
-      "code": "HLT",
-      "color": "#00C46A",
+      "sector": "Community Experience",
+      "code": "CMX",
+      "color": "#FFB800",
       "description": "Valley Arcade Games is a cross-platform arcade network that connects physical arcade cabinets, web/mobile games, and community-based play into a single competitive ecosystem with shared identity, shared leaderboards, and skill-based rewards.",
       "url": "https://valley.games/",
       "logo": "/portfolio/valley_ecosystem_logo.jpeg"

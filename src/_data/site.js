@@ -1,12 +1,13 @@
 module.exports = {
   title: "Lyle Ventures",
-  description: "Family office investing in founders building critical systems at the technology frontier.",
+  description: "We back early-stage companies building critical systems for the AI economy.",
   url: "https://lyle-ventures.xyz",
   sectors: [
-    { name: "AI Mechanicals", code: "AIM", color: "#00B4D8" },
-    { name: "Defense Tech", code: "DEF", color: "#E63956" },
+    { name: "AI Mechanicals", code: "AIM", color: "#00D4FF" },
+    { name: "Scarce Crypto", code: "SCR", color: "#CC44FF" },
+    { name: "Defense Tech", code: "DEF", color: "#FF3366" },
     { name: "Health Tech", code: "HLT", color: "#00C46A" },
-    { name: "Scarce Crypto", code: "SCR", color: "#9B5DE5" },
+    { name: "Community Experience", code: "CMX", color: "#FFB800" },
     { name: "Fund of Funds", code: "FOF", color: "#9CA3AF", deemphasized: true }
   ]
 };

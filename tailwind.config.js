@@ -9,13 +9,13 @@ module.exports = {
         'lv-bg-secondary': '#111118',
         'lv-accent': '#6366f1',
         
-        // Sector colors (locked)
+        // Sector colors (canonical brand tokens)
         'sector-ai': '#00D4FF',
+        'sector-crypto': '#CC44FF',
         'sector-defense': '#FF3366',
-        'sector-energy': '#00FF88',
-        'sector-bio': '#FFB800',
-        'sector-crypto': '#AA66FF',
-        'sector-education': '#FF6B35',
+        'sector-health': '#00C46A',
+        'sector-community': '#FFB800',
+        'sector-fund': '#9CA3AF',
       },
       fontFamily: {
         'sans': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],

@@ -1,285 +1,249 @@
-# Lyle Ventures Brand Guidelines
+# Lyle Ventures Brand Guide
 
-## Brand Overview
-
-Lyle Ventures is a venture capital firm focused on "creators and builders at the technology frontier." The visual identity balances technical precision with approachable elegance—a periodic table element meets modern fintech.
+*Last updated: February 2026*
 
 ---
 
-## Colors
+## Brand Story
 
-### Primary Palette
+Lyle Ventures is a family office backing founders at the earliest stages. We invest at the intersection of physical bottlenecks, scarce digital assets, and technology that is truly life-changing or timeless.
 
-| Name | Hex | RGB | Usage |
-|------|-----|-----|-------|
-| **Indigo** | `#6366f1` | 99, 102, 241 | Primary accent, logo, interactive elements |
-| **Near Black** | `#111827` | 17, 24, 39 | Primary text (light backgrounds) |
-| **White** | `#ffffff` | 255, 255, 255 | Primary text (dark backgrounds), backgrounds |
-| **Pure Dark** | `#08080c` | 8, 8, 12 | Dark mode background |
-
-### Sector Colors (Portfolio Categorization)
-
-| Sector | Hex | RGB |
-|--------|-----|-----|
-| AI | `#00D4FF` | 0, 212, 255 |
-| Defense | `#FF3366` | 255, 51, 102 |
-| Energy | `#00FF88` | 0, 255, 136 |
-| Biomedical | `#FFB800` | 255, 184, 0 |
-| Crypto | `#AA66FF` | 170, 102, 255 |
-| Education | `#FF6B35` | 255, 107, 53 |
+The current AI transition is the most significant in human history and requires the largest economic system upgrade ever attempted. We believe this creates generational opportunity in five categories.
 
 ---
 
-## Typography
+## Positioning
 
-### Font Family
+**Tagline:** Venture capital for founders reshaping how we produce intelligence, move value, provide security, give life, and bring joy.
 
-**Inter** — Primary typeface for all applications
+**Short form:** We back early-stage companies building critical systems for the AI economy.
 
-```css
-font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-```
+**Boilerplate:** Lyle Ventures backs early-stage companies building critical systems for the AI economy. We are a family office for founders reshaping how we produce intelligence, move value, provide security, give life, and bring joy. Our core portfolio categories are: AI Mechanicals, Scarce Crypto, Defense Tech, Health Tech, and Community Experience. Above all, we love learning from the founders and companies we support.
 
-Inter is a free, open-source typeface designed for screen readability. It closely matches system UI fonts (San Francisco, Segoe UI) while providing cross-platform consistency.
+---
 
-**Source:** https://fonts.google.com/specimen/Inter
+## Investment Verticals
 
-### Font Weights
+### AI Mechanicals
+**Function:** Produces intelligence | **Why:** Physical bottlenecks
+
+Physical machinery forming the mechanical layer for producing abundant intelligence. Chips, fabs, reactors, turbines, cooling systems, transformers. Constrained by principles of physics.
+
+### Scarce Crypto
+**Function:** Moves value | **Why:** Scarce digital assets
+
+Assets that resiliently store value and move at high velocity with minimal friction. Fewer middlemen, more ownership. Scarce crypto assets only.
+
+### Defense Tech
+**Function:** Provides security | **Why:** Timeless
+
+Security is a timeless imperative. AI and robotics create new conflict vectors that require innovation and investment. Autonomous hardware and systems, cyber defense, space.
+
+### Health Tech
+**Function:** Gives life | **Why:** Life changing
+
+AI unlocks what was previously thought impossible in human biology. Human upgrades for an age of exponential change. The gift of life.
+
+### Community Experience
+**Function:** Brings joy | **Why:** Human interaction
+
+Real-world human experiences that are already scarce and will only become more so in the world of AI. The things that make us human — connection, play, presence, shared moments.
+
+---
+
+## Visual Identity
+
+### Color Palette
+
+#### Primary
+
+| Color | Hex | Swatch | Role |
+|-------|-----|--------|------|
+| Indigo | `#6366f1` | | Primary accent — logo, links, interactive elements |
+| Near Black | `#111827` | | Text on light backgrounds |
+| White | `#ffffff` | | Light backgrounds, text on dark backgrounds |
+| Pure Dark | `#08080c` | | Internal/Universe dashboard background only |
+
+#### Sector
+
+| Sector | Hex | Role |
+|--------|-----|------|
+| AI Mechanicals | `#00D4FF` | Categorization and data visualization |
+| Scarce Crypto | `#CC44FF` | Categorization and data visualization |
+| Defense Tech | `#FF3366` | Categorization and data visualization |
+| Health Tech | `#00C46A` | Categorization and data visualization |
+| Community Experience | `#FFB800` | Categorization and data visualization |
+
+#### Usage Rules
+
+- Indigo is the only brand color used for UI elements, links, and accent treatments
+- Sector colors appear only in portfolio categorization, charts, and data contexts
+- **Light mode is the primary presentation:** white background, near-black text, indigo accents — this matches the public lyle.vc website (`base.njk: bg-white text-gray-900`)
+- Dark mode exists only for the internal Universe dashboard (`universe.njk`). It is NOT the public brand.
+- pureDark (#08080c) and darkCard (#111118) are NOT used on the public website body — they are internal-only tokens
+- All public-facing assets (LinkedIn, email, social, decks) use the light theme
+- Never mix sector colors with UI indigo in the same visual element
+
+---
+
+### Typography
+
+**Primary typeface:** Inter
+
+Inter is a free, open-source typeface designed for screen readability. It closely matches system UI fonts while providing cross-platform consistency.
 
 | Weight | Name | Usage |
 |--------|------|-------|
+| 300 | Light | Hero headlines only (uppercase, tight tracking) |
 | 400 | Regular | Body text |
-| 500 | Medium | Wordmark text, emphasized body |
-| 600 | SemiBold | LV mark, headings, buttons |
-| 700 | Bold | Strong emphasis |
+| 500 | Medium | Wordmark, emphasized body, subtitles |
+| 600 | SemiBold | Headings, LV mark, buttons, card titles |
+| 700 | Bold | Strong emphasis, navigation |
+| 900 | Black | Company name display (rare, website only) |
 
-### Letter Spacing
+**Secondary typeface:** SF Mono (fallback: Fira Code, Consolas)
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `tighter` | -0.025em | Wordmark ("Lyle.Ventures") |
-| `tight` | -0.01em | Headings |
-| `normal` | 0 | Body text |
-| `wide` | 0.02em–0.03em | LV mark |
+Used only for code, data labels, and ticker-style metadata contexts.
+
+**Rules:**
+- Maximum 2 typefaces in any single deliverable (Inter + mono)
+- Maximum 3 weights in any single slide or page
+- Body text is always Inter 400
+- When in doubt, use Inter 400 at the default body size
 
 ---
 
-## Logo System
+### Logo System
 
-### Structure
-
-The logo follows a **Box + Dot** hybrid format:
+The Lyle Ventures logo is a **Box + Dot** hybrid:
 
 ```
 [LV] Lyle.Ventures
- ↑       ↑  ↑
- │       │  └── Indigo dot (accent)
- │       └───── Near-black wordmark
- └──────────── Indigo box with LV mark
 ```
 
-### Logo Mark (Box)
+The [LV] box evokes a periodic table element — solid, elemental, foundational. The indigo dot between "Lyle" and "Ventures" is a distinctive brand element.
 
-The LV box is designed to evoke a periodic table element—solid, elemental, foundational.
+#### Logo Variants
 
-| Property | LinkedIn Icon (300px) | Favicon (32px) | Wordmark Box |
-|----------|----------------------|----------------|--------------|
-| **Box size** | 292×292 (with 4px inset) | 30.5×30.5 | 30.5×30.5 |
-| **Border** | 8px solid `#6366f1` | 1.5px solid `#6366f1` | 1.5px solid `#6366f1` |
-| **Background** | White | White | Transparent |
-| **LV font size** | 130px | 15px | 15px |
-| **LV font weight** | 600 (SemiBold) | 600 (SemiBold) | 600 (SemiBold) |
-| **LV letter spacing** | 0.03em | 0.02em | 0.02em |
-| **LV color** | `#6366f1` | `#6366f1` | `#6366f1` |
+| Variant | Use Case | Files |
+|---------|----------|-------|
+| Full wordmark | Primary use everywhere | `lyle-ventures-standard.*` |
+| Square mark | Social profile pics, favicons | `lv-linkedin-logo-indigo-outline.*` |
+| Small icon | Favicon, app icon | `lv-icon-indigo.*` |
 
-### Wordmark
-
-| Property | Value |
-|----------|-------|
-| **Font** | Inter |
-| **Weight** | 500 (Medium) |
-| **Size** | 18px (at 1x scale) |
-| **Letter spacing** | -0.025em |
-| **"Lyle" color** | `#111827` (light bg) or `#ffffff` (dark bg) |
-| **Dot color** | `#6366f1` |
-| **Dot size** | 125% of base font |
-| **"Ventures" color** | `#111827` (light bg) or `#ffffff` (dark bg) |
-
-### The Dot
-
-The indigo dot is a key brand element. It sits tightly between "Lyle" and "Ventures" with minimal spacing.
-
-```css
-/* Dot positioning */
-margin-left: 0.02em;
-margin-right: -0.1em;  /* Tucks close to "V" */
-font-size: 125%;
-color: #6366f1;
-```
-
----
-
-## Logo Files
-
-### Primary Assets
-
-| Filename | Format | Dimensions | Use Case |
-|----------|--------|------------|----------|
-| `lyle-ventures-standard.svg` | SVG | 200×40 | Vector master, web |
-| `lyle-ventures-standard-8x.png` | PNG | 1600×320 | High-res digital |
-| `lyle-ventures-standard-32x.png` | PNG | 6400×1280 | Print, archival |
-
-### LinkedIn / Social Icon
-
-| Filename | Format | Dimensions | Use Case |
-|----------|--------|------------|----------|
-| `lv-linkedin-logo-indigo-outline.svg` | SVG | 300×300 | Vector master |
-| `lv-linkedin-logo-indigo-outline-8x.png` | PNG | 2400×2400 | LinkedIn upload |
-| `lv-linkedin-logo-indigo-outline-32x.png` | PNG | 9600×9600 | Archival |
-
-### Favicon / App Icon
-
-| Filename | Format | Dimensions | Use Case |
-|----------|--------|------------|----------|
-| `lv-icon-indigo.svg` | SVG | 32×32 | Vector master |
-| `lv-icon-indigo-256.png` | PNG | 256×256 | Apple touch icon |
-| `lv-icon-indigo-512.png` | PNG | 512×512 | PWA icon |
-
----
-
-## Usage Guidelines
-
-### Clear Space
+#### Clear Space
 
 Maintain minimum clear space around the logo equal to the height of the "L" in the wordmark.
 
-### Minimum Size
+#### Minimum Sizes
 
-- **Full wordmark:** 120px wide minimum
-- **Icon only:** 24px minimum
+- Full wordmark: 120px wide minimum
+- Icon only: 24px minimum
 
-### Do's
+#### Do
 
-- ✓ Use on white or light neutral backgrounds
-- ✓ Use white version on dark backgrounds (`#08080c` or darker)
-- ✓ Maintain aspect ratio when scaling
-- ✓ Use SVG for web whenever possible
+- Use on white or light neutral backgrounds
+- Use white wordmark variant on dark backgrounds
+- Maintain aspect ratio when scaling
+- Use SVG for web whenever possible
 
-### Don'ts
+#### Don't
 
-- ✗ Don't stretch or distort
-- ✗ Don't change the indigo color
-- ✗ Don't add effects (shadows, gradients, outlines)
-- ✗ Don't separate the box from the wordmark
-- ✗ Don't change the dot to a different shape
+- Stretch or distort
+- Change the indigo color
+- Add effects (shadows, gradients, outlines)
+- Separate the box from the wordmark
+- Change the dot to a different shape
 
 ---
 
-## Implementation
+### LinkedIn Assets
 
-### HTML Example (Wordmark)
+| Asset | Dimensions | File |
+|-------|-----------|------|
+| Company banner | 1128 x 191 | `lv-linkedin-company-banner.png` |
+| Employee background | 1584 x 396 | `lv-linkedin-employee-bg.png` |
+| Company logo | 300 x 300 | `lv-linkedin-logo-indigo-outline-8x.png` |
 
-```html
-<a href="/" class="logo">
-  <div class="lv-box">
-    <span class="lv-mark">LV</span>
-  </div>
-  <span class="lv-wordmark">
-    Lyle<span class="lv-dot">.</span>Ventures
-  </span>
-</a>
-```
+#### Safe Zones & Overlaps
 
-### CSS Example
+**Company banner (1128 x 191):**
+The company logo (~300px square) overlaps the bottom-left corner of the banner. Do not place important content in the bottom-left ~320px × 120px zone. Content should be positioned center or right.
 
-```css
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
+**Employee background (1584 x 396):**
+The profile photo (circular, ~300-400px) overlaps the bottom-left area. The name/title text block sits below center-left. Avoid important content in the left ~400px and bottom ~150px. Safe zone is upper-right and center-right.
 
-.lv-box {
-  width: 32px;
-  height: 32px;
-  border: 1.5px solid #6366f1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+#### Banner Design
 
-.lv-mark {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  color: #6366f1;
-  letter-spacing: 0.02em;
-}
+**Company banner:** White (#ffffff) background — matches lyle.vc public website body (`bg-white`). Subtle nearBlack dot texture for surface depth (standard pattern-fill treatment, ~2000 dots at 3-6% opacity). LV box mark + "Lyle.Ventures" wordmark at 26px in nearBlack text with indigo dot and box, right-aligned with 60px margin from edge. No gradients, no accent lines, no layered elements.
 
-.lv-wordmark {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  color: #111827;
-  letter-spacing: -0.025em;
-}
+**Employee background:** Same white (#ffffff) background with nearBlack dot texture (~3500 dots). LV box mark in upper-right at 50% opacity with subdued "LYLE VENTURES" letterspaced label beneath at 20% opacity. Generic — no employee name, suitable for any team member. Content avoids the profile photo overlap zone (bottom-left).
 
-.lv-dot {
-  color: #6366f1;
-  font-size: 125%;
-  margin-left: 0.02em;
-  margin-right: -0.1em;
-}
-```
+---
 
-### Loading Inter Font
+### Email Signature
 
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-```
+| Element | Value |
+|---------|-------|
+| File | `assets/platforms/email/lv-email-signature.html` |
+| Guide | `assets/platforms/email/email-signature-guide.md` |
+| Theme | Light (white background — consistent with public brand) |
+
+**Design:** Clean text-only signature using system fonts. No images, logos, or social icons. The indigo accent (`#6366f1`) is the only brand color; all other values are email-standard system grays.
+
+**Color palette (light theme):**
+
+| Role | Hex | Token |
+|------|-----|-------|
+| Body text | `#1a1a1a` | `EMAIL.textPrimary` |
+| Title / secondary | `#555555` | `EMAIL.textSecondary` |
+| Labels | `#888888` | `EMAIL.textLabel` |
+| Indigo accent | `#6366f1` | `EMAIL.accent` |
+| Background | `#ffffff` | `EMAIL.bg` |
+
+These light-theme grays are defined in `lib/tokens.mjs` under the `EMAIL` export. They use email-standard system grays rather than the brand's nearBlack — this is standard practice for email client compatibility.
+
+---
+
+## Voice & Tone
+
+### Character
+
+We sound like a knowledgeable peer sharing a perspective, not a marketer making a pitch. Confident without arrogance. Specific without jargon. Brief without being cold.
+
+### Principles
+
+1. **Lead with the idea, not the fund.** Center the thesis, not ourselves.
+2. **Be specific.** "Physical bottlenecks constrained by physics" beats "exciting opportunities."
+3. **Respect the reader's time.** If it can be said in fewer words, say it in fewer words.
+4. **Show, don't tell.** Name the companies, describe the technology, cite the data.
+5. **Stay grounded.** We're a family office, not a megafund. Own that scale with confidence.
+
+### Proprietary Terms
+
+| Term | Usage |
+|------|-------|
+| AI Mechanicals | Investment vertical — never "AI infrastructure" |
+| Scarce Crypto | Investment vertical — never "blockchain" or "web3" |
+| Community Experience | Investment vertical — never "entertainment" |
+| Perpetual motion | Founder evaluation framework (action + learning velocity) |
+| Learning rate | The critical early-stage founder signal |
+| Enterprise Build Test | "Can a sophisticated enterprise build this with AI in 6-12 months?" |
+| Bottleneck Test | "Are they in the constraint or commodity layer?" |
+
+### Banned Language
+
+- "Disrupt" / "disruption"
+- "Synergy" / "synergistic"
+- "Cutting-edge" / "state-of-the-art"
+- "Leverage" (as a verb in marketing copy)
+- "Web3" (use "Scarce Crypto")
+- "Portfolio company" in external copy (say the company name, or "company we back")
 
 ---
 
 ## File Locations
 
-### Source (Repository)
+All brand assets live in the `lyle-ventures-brand-builder/` folder. This is the single source of truth. The website repository, Canva, and all other platforms pull from here.
 
-```
-/branding/
-├── LYLE-VENTURES-BRAND.md    # This file
-├── fonts/
-│   └── Inter.zip             # Inter font (for offline/design use)
-└── logos/
-    ├── lyle-ventures-standard.svg
-    ├── lyle-ventures-standard-8x.png
-    ├── lyle-ventures-standard-32x.png
-    ├── lv-linkedin-logo-indigo-outline.svg
-    ├── lv-linkedin-logo-indigo-outline-8x.png
-    ├── lv-linkedin-logo-indigo-outline-32x.png
-    ├── lv-icon-indigo.svg
-    ├── lv-icon-indigo-256.png
-    └── lv-icon-indigo-512.png
-```
-
-### Website (Served URLs)
-
-Logos are served at `/logos/` on the website (e.g., `https://lyle-ventures.xyz/logos/lv-icon-indigo.svg`).
-
----
-
-## Version History
-
-| Date | Change |
-|------|--------|
-| 2026-01-13 | Reorganized assets into `/branding/` folder |
-| 2026-01-13 | Added Inter font to website via Google Fonts |
-| 2026-01-13 | Standardized on Inter font for cross-platform consistency |
-| 2026-01-13 | Increased LV mark size (130px) for "periodic table" density |
-| 2026-01-13 | Tightened dot spacing in wordmark |
-
----
-
-*Last updated: January 13, 2026*
+See CLAUDE.md for the full file tree.

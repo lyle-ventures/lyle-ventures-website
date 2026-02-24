@@ -1,7 +1,12 @@
 /**
- * Cloudflare Worker: FRED API Proxy
+ * Cloudflare Worker: FRED API Proxy v2.1
  *
  * Deploy to Cloudflare Workers to proxy FRED API requests and avoid CORS issues.
+ *
+ * CHANGELOG v2.1:
+ * - Added stale-while-revalidate caching
+ * - Added error details in response
+ * - Added version header
  *
  * Setup:
  * 1. Go to Cloudflare Dashboard > Workers & Pages
@@ -31,6 +36,11 @@ export default {
 
     const url = new URL(request.url);
 
+    // Health check endpoint
+    if (url.pathname === '/health') {
+      return jsonResponse({ status: 'ok', version: '2.1', timestamp: new Date().toISOString() });
+    }
+
     // Get series ID from query params
     const seriesId = url.searchParams.get('series_id');
     if (!seriesId) {
@@ -57,12 +67,27 @@ export default {
       const response = await fetch(fredUrl.toString());
       const data = await response.json();
 
+      // Check for FRED API errors
+      if (data.error_message) {
+        return jsonResponse({
+          series_id: seriesId,
+          observations: [],
+          error: data.error_message,
+          fred_error_code: data.error_code
+        }, 200); // Return 200 but with error info so client can handle gracefully
+      }
+
       return jsonResponse({
         series_id: seriesId,
-        observations: data.observations || []
+        observations: data.observations || [],
+        count: data.observations?.length || 0
       }, 200);
     } catch (error) {
-      return jsonResponse({ error: 'Failed to fetch from FRED API' }, 500);
+      return jsonResponse({ 
+        error: 'Failed to fetch from FRED API',
+        message: error.message,
+        series_id: seriesId
+      }, 500);
     }
   }
 };
@@ -73,7 +98,9 @@ function jsonResponse(data, status) {
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Cache-Control': 'public, max-age=3600'
+      // Updated: shorter cache with stale-while-revalidate for fresher data
+      'Cache-Control': 'public, max-age=1800, stale-while-revalidate=3600',
+      'X-Proxy-Version': '2.1'
     }
   });
 }
