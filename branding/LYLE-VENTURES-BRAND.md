@@ -47,7 +47,7 @@ AI unlocks what was previously thought impossible in human biology. Human upgrad
 ### Community Experience
 **Function:** Brings joy | **Why:** Human interaction
 
-Real-world human experiences that are already scarce and will only become more so in the world of AI. The things that make us human — connection, play, presence, shared moments.
+Real-world human experiences that are already scarce and will only become more so in the world of AI. Connection, presence, shared moments, human excellence.
 
 ---
 
