@@ -4,7 +4,7 @@
 
 ## Overview
 
-Lyle Ventures is a family office investing in founders reshaping how we produce intelligence, move value, provide security, and give life. We believe the current AI supercycle is the most significant transition in human history and creates generational opportunity.
+Lyle Ventures is a family office investing in founders reshaping how we produce intelligence, move value, provide security, give life, and bring joy. We believe the current AI supercycle is the most significant transition in human history and creates generational opportunity.
 
 ## Founder
 
@@ -25,10 +25,11 @@ $10K – $25K
 ### Sectors
 
 1. **AI Mechanicals** — Physical machinery that forms the mechanical layer for producing abundant intelligence. Chips, fabs, reactors, turbines, cooling systems, transformers. Constrained by principles of physics.
-2. **Defense Tech** — Security is a timeless imperative. AI and robotics create new conflict vectors requiring innovation. Autonomous hardware and systems, cyber defense, space.
-3. **Health Tech** — AI unlocks what was previously thought impossible in human biology. Human upgrades for an age of exponential change. The gift of life.
-4. **Scarce Crypto** — Assets that resiliently store value and move at high velocity with minimal friction. Fewer middlemen, more ownership. Scarce crypto assets only.
-5. **Fund of Funds** — Strategic LP positions in aligned venture funds.
+2. **Scarce Crypto** — Assets that resiliently store value and move at high velocity with minimal friction. Fewer middlemen, more ownership. Scarce crypto assets only.
+3. **Defense Tech** — Security is a timeless imperative. AI and robotics create new conflict vectors requiring innovation. Autonomous hardware and systems, cyber defense, space.
+4. **Health Tech** — AI unlocks what was previously thought impossible in human biology. Human upgrades for an age of exponential change. The gift of life.
+5. **Community Experience** — Real-world human experiences that are already scarce and will only become more so in the world of AI. The things that make us human — connection, play, presence, shared moments.
+6. **Fund of Funds** — Strategic LP positions in aligned venture funds.
 
 ## What We Believe
 
